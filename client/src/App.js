@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { 
   Home, 
   Login, 
+  Logout,
   SignupCafe,
   SignupFarmer,
   CafeDetail,
@@ -57,12 +58,12 @@ const Header = () => {
             )}
             {authContext.state.userType === 'CAFE' ? (
                 <div>
-                  <Link to="/" className='my-page-plain'>Log Out</Link>
+                  <Link to="/logout" className='my-page-plain'>Log Out</Link>
                   <Link to="/mypagecafe" className='my-page-btn'>My Page</Link>
                 </div>
               ) : (
                 <div>
-                  <Link to="/" className='my-page-plain' >Log Out</Link>
+                  <Link to="/logout" className='my-page-plain' >Log Out</Link>
                   <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
                 </div>
             )}
@@ -115,6 +116,7 @@ function App() {
           <Routes>
             <Route path="/" exact={true} element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/signup/cafe' element={<SignupCafe />} />
             <Route path='/signup/farmer' element={<SignupFarmer />} />
             <Route path='/cafedetail/:postSeq' element={<CafeDetail />} />
