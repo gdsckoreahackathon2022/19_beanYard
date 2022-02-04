@@ -83,6 +83,10 @@
     font-size: 1.3rem;
 }
 
+.login-error-text {
+    color: red;
+}
+
 /* Signup */
 .Signup {
     display: flex;

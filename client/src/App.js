@@ -19,6 +19,8 @@ import {
   useReducer,
   createContext,
   useContext,
+  useEffect,
+  useState,
 } from "react";
 import {ReactComponent as Logo} from './assets/logo.svg';
 
@@ -38,7 +40,7 @@ const Header = () => {
           </div>
         ) : (
           <>
-            {authContext.state.userType === 'C' ? (
+            {authContext.state.userType === 'CAFE' ? (
               <div>
                 <Link to="/">About Us</Link>
                 <Link to="/howto">How To</Link>
@@ -51,7 +53,7 @@ const Header = () => {
                 <Link to="/mainfarmer">Main</Link>
               </div>
             )}
-            {authContext.state.userType === 'C' ? (
+            {authContext.state.userType === 'CAFE' ? (
                 <div>
                   <Link to="/" className='my-page-plain'>Logout</Link>
                   <Link to="/mypagecafe" className='my-page-btn'>My Page</Link>
@@ -102,6 +104,34 @@ function App() {
     userType: null,
     userSeq: null,
   });
+
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("loggedInfo")));
+
+    const initUserInfo = async () => {
+        const loggedInfo = await JSON.parse(
+            localStorage.getItem("loggedInfo")
+        );
+        console.log("-------------새로 고침------------");
+        console.log(loggedInfo);
+
+        if (loggedInfo) {
+            const { token, userName, userType, userSeq } = loggedInfo;
+            await dispatch({
+                type: "login",
+                token: token,
+                userName: userName,
+                userType: userType,
+                userSeq: userSeq,
+            });
+        } else {
+            await dispatch({
+                type: "logout",
+            });
+        }
+    };
+    initUserInfo();
+  }, [state.token]);
 
   return (
     <div className="App">

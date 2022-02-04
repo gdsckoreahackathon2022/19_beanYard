@@ -55,7 +55,7 @@ const LoginForm = () => {
                             userType: data.userType,
                             userSeq: data.userSeq,
                         })
-                    } else if (status === 401) {
+                    } else {
                         setLoginErrorMsg("Try Again!");
                     }
                 })
@@ -67,12 +67,22 @@ const LoginForm = () => {
                 authContext.dispatch({
                     ...auth
                 });
+                localStorage.setItem(
+                    "loggedInfo",
+                    JSON.stringify({ 
+                        token: auth.token,
+                        userType: auth.userType,
+                        userName: auth.userName,
+                        userSeq: auth.userSeq,
+                    })
+                );
                 if (auth.token !== "") {
                     navigate("/"); // 로그인 성공 시 Home으로 이동
                 }
                 // console.log(authContext.state);
             } catch (error) {
                 console.log(error);
+                setLoginErrorMsg("Try Again!");
             }
         }
         await post();
@@ -108,7 +118,7 @@ const LoginForm = () => {
                     />
                 </div>
             </div>
-            <p>{loginErrorMsg}</p>
+            <p className="login-error-text">{loginErrorMsg}</p>
             <br></br>
             <button
                 className="Login-button"
