@@ -20,7 +20,7 @@ const SignupFormCafe = ({ history }) => {
                     type: "CafeLogin",
                     token: data.token,
                     userName: details.userName,
-                    cf: 'c',
+                    cf: 'CAFE',
                 });
                 
                 history.pushState("/login"); // 성공 시 login 으로 이동

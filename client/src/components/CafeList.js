@@ -1,13 +1,34 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../App";
 import { getApi } from "../api";
+import { Post } from "../components"
+
+const initialData = [
+    {
+        cafeName: "ffffff",
+        phone: "010-1233-2222",
+        cafeLocation: "d",
+        coffee: "d",
+        time: "d",
+    }
+]
 
 const CafeList = () => {
     const authContext = useContext(AuthContext);
+    const [applyList, setApplyList] = useState(initialData);
     
     return (
         <div>
-            CafeList
+            <h5>커피박 기부한 카페 리스트</h5>
+            <Post 
+                key={1}
+                cafeName={applyList[0].cafeName}
+                phone={applyList[0].phone}
+                cafeLocation={applyList[0].cafeLocation}
+                coffee={applyList[0].coffee}
+                time={applyList[0].time}
+                page={"mainfarmer"}
+            />
         </div>
     );
 };

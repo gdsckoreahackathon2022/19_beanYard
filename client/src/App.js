@@ -36,7 +36,7 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          {authContext.state.userType ? (
+          {authContext.state.userType === 'CAFE' ? (
           <div>
             <Link to="/maincafe">Main</Link>
             <Link to="/mypagecafe">Cafe Owner</Link>
@@ -58,12 +58,12 @@ export const AuthContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // userName : userid. token이랑 같이 백에 넘기기. 
-    // userType : cafe or farmer 구분. 'c', 'f'
+    // userSeq : token이랑 같이 백에 넘기기
+    // userType : cafe or farmer 구분. 'C', 'F'
       case "CafeLogin":
-          return { token: action.token, userName: action.userName, userType: action.userType };
+          return { token: action.token, userName: action.userName, userType: action.userType, userSeq: action.userSeq };
       case "FarmerLogin":
-          return { token: action.token, userName: action.userName, userType: action.userType };
+          return { token: action.token, userName: action.userName, userType: action.userType, userSeq: action.userSeq };
       case "logout":
           return { token: null, userName: null, userType: null };
       default:
@@ -75,7 +75,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     token: null,
     userName: null,
-    userType: 'c',
+    userType: 'f',
   });
 
   return (
@@ -86,7 +86,7 @@ function App() {
             <Route path="/" exact={true} element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/cafedetail' element={<CafeDetail />} />
+            <Route path='/cafedetail/:postSeq' element={<CafeDetail />} />
             <Route path='/maincafe' element={<MainCafe />} />
             <Route path='/mainfarmer' element={<MainFarmer />} />
             <Route path='/mypagecafe' element={<MyPageCafe />} />

@@ -5,6 +5,7 @@ import { getApi, postApi } from "../api";
 const CafeDetail = () => {
     const authContext = useContext(AuthContext);
     const [cafeData, setCafeData] = useState({
+        postSeq: "",
         cafename: "",
         location: "",
         time: "",
@@ -15,7 +16,10 @@ const CafeDetail = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         await postApi(
-            {},
+            {
+                // userSeq: authContext.state.userSeq,
+                // postSeq: 
+            }, // 농장주 userSeq, postSeq
             "/apply"
         )
     }
@@ -33,6 +37,7 @@ const CafeDetail = () => {
                     if (status === 200) {
                         console.log(data);
                         setCafeData({
+                            postSeq: data.postSeq,
                             cafename: data.cafename,
                             location: data.location,
                             time: data.time,

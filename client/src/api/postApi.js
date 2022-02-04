@@ -10,7 +10,7 @@ const postApi = async (data, end_url, token) => {
         config.headers["Authorization"] = `Bearer ${token}`;
     }
     return await axios.post(
-        "http://27.96.134.100:8080" + end_url,
+        "http://beanyard.shop:8080" + end_url,
         data,
         config
     );
