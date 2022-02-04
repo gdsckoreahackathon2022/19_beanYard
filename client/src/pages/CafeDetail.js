@@ -14,10 +14,10 @@ const CafeDetail = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        // await postApi(
-        //     {},
-        //     "/"
-        // )
+        await postApi(
+            {},
+            "/apply"
+        )
     }
 
     useEffect(() => {
