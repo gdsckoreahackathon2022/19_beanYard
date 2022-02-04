@@ -28,7 +28,7 @@ const MainCafe = () => {
             await axios.get(`http://27.96.134.100:8080/api/cafe?userSeq=${authContext.state.userSeq}`, config)
             .then(({ status, data }) => {
                 console.log(status, data);
-                setInfo(data.content);
+                if(data.content) setInfo(data.content);
             })
             .catch((e) => {
                 console.log(e);

@@ -30,15 +30,19 @@ const Header = () => {
       <Logo width={60} height={60} />
       <div className="header-links">
         {!authContext.state.token ? (
-          <div className="App-header-Login">
-            <Link to="/">About Us</Link>
-            <Link to="/howto">How To</Link>
-            <Link to="/login" className='my-page-plain'>Login</Link>
-            <Link to="/choosetype" className='my-page-plain'>Sign Up</Link>
-          </div>
+          <>
+            <div className="App-header-Login">
+              <Link to="/">About Us</Link>
+              <Link to="/howto">How To</Link>
+            </div>
+            <div>
+              <Link to="/login" className='my-page-plain'>Login</Link>
+              <Link to="/choosetype" className='my-page-plain'>Sign Up</Link>
+            </div>
+          </>
         ) : (
           <>
-            {authContext.state.userType === 'C' ? (
+            {authContext.state.userType === 'CAFE' ? (
               <div>
                 <Link to="/">About Us</Link>
                 <Link to="/howto">How To</Link>
@@ -51,17 +55,18 @@ const Header = () => {
                 <Link to="/mainfarmer">Main</Link>
               </div>
             )}
-            {authContext.state.userType === 'C' ? (
+            {authContext.state.userType === 'CAFE' ? (
                 <div>
-                  <Link to="/" className='my-page-plain'>Logout</Link>
+                  <Link to="/" className='my-page-plain'>Log Out</Link>
                   <Link to="/mypagecafe" className='my-page-btn'>My Page</Link>
                 </div>
               ) : (
                 <div>
-                  <Link to="/" className='my-page-plain'>Log Out</Link>
+                  <Link to="/" className='my-page-plain' >Log Out</Link>
                   <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
                 </div>
             )}
+            <div>{ authContext.state.userType === 'CAFE'  }</div>
           </>
         )}
       </div>
