@@ -44,7 +44,7 @@ const MainFarmer = () => {
             });
         };
         getMyDonations();
-    }, [lat, lng]);
+    }, [lat, lng, authContext.state.userSeq]);
 
     const fetchPlaces = (mapProps, map) => {
         const {google} = mapProps;
@@ -72,6 +72,7 @@ const MainFarmer = () => {
             </Map>
             <div className="cafe-list">
                 {
+                    info.length &&
                     info.map((e, idx) => {
                         return (
                             <Link to={`/cafedetail/${e.cafeSeq}`} className="card-content" key={idx}>

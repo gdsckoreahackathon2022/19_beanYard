@@ -7,9 +7,9 @@ const getApi = async (params, end_url, token) => {
             Accept: "application/json",
         },
     };
-    if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-    }
+    // if (token) {
+    //     config.headers["Authorization"] = `Bearer ${token}`;
+    // }
     return await axios.get("http://27.96.134.100:8080" + end_url, config);
 };
 

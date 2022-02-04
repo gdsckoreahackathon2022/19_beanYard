@@ -86,7 +86,7 @@ const reducer = (state, action) => {
 function App() {
   const [state, dispatch] = useReducer(reducer, {
     token: 'tmp',
-    userName: null,
+    userName: 'admin',
     userType: 'F',
     userSeq: 1,
   });
