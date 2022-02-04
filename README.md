@@ -5,8 +5,6 @@
 <p>커피박은 현재 폐기물 쓰레기로 배출되고 있지만, 재활용 가치가 높은 유기성 자원입니다.</p>
 <p>그래서 우리는 커피박을 재활용 할 수 있는 방안에 대해 생각해보았습니다.</p>
 
----
-
 ## Functions
 :bulb: Google Map API 사용
 
@@ -22,15 +20,11 @@
 
 <img src="https://user-images.githubusercontent.com/61970111/152613580-43ed67ae-1916-4aab-8bc6-331d61ec49e9.png" width="400" height="200" />
 
----
-
 ## Tech. Stacks
 - React
 - Spring Boot
 - Figma
 - Naver Cloud Platform
-
----
 
 ## Members
 <table>
