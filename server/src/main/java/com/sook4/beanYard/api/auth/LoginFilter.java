@@ -1,4 +1,4 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;

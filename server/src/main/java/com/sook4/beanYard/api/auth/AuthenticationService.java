@@ -1,4 +1,4 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

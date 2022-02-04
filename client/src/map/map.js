@@ -80,20 +80,13 @@ function MyMap() {
 
     return (
         <>
-            <input
-                id="pac-input"
-                className="controls"
-                type="text"
-                placeholder="Search Box"
-                onKeyPress={getInfo}
-                onClick={getInfo}
-            />
             <Map
                 google={window.google}
                 zoom={12}
                 onReady={fetchPlaces}
                 initialCenter={{ lat: lat, lng: lng}}
                 center={{lat: lat, lng: lng}}
+                visible={false}
             >
                 <Marker position={{ lat: lat, lng: lng}} />
                 {

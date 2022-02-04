@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import { Routes, Route, Link } from "react-router-dom";
 import { 
   Home, 
@@ -8,6 +8,7 @@ import {
   MainCafe,
   MainFarmer,
   MyPageCafe,
+  CafeApply,
   MyPageFarmer,
   HowTo,
   NotFound,
@@ -16,8 +17,6 @@ import {
   useReducer,
   createContext,
   useContext,
-  useEffect,
-  useState,
 } from "react";
 
 
@@ -49,7 +48,6 @@ const Header = () => {
           )}
         </div>
       )}
-      
     </header>
   );
 }
@@ -73,7 +71,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
-    token: null,
+    token: 'tmp',
     userName: null,
     userType: 'f',
   });
@@ -88,6 +86,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/cafedetail/:postSeq' element={<CafeDetail />} />
             <Route path='/maincafe' element={<MainCafe />} />
+            <Route path='/maincafe/apply' element={<CafeApply />} />
             <Route path='/mainfarmer' element={<MainFarmer />} />
             <Route path='/mypagecafe' element={<MyPageCafe />} />
             <Route path='/mypagefarmer' element={<MyPageFarmer />} />
