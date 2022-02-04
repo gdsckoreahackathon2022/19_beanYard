@@ -91,6 +91,10 @@ const CafeApply = () => {
         )
         .then(({ status, data }) => {
             console.log(status, data);
+            if(status === 200 || status === 201 || status === 204) {
+                alert('제출되었습니다.');
+                window.location.reload();
+            }
         })
         .catch((e) => {
             console.log(e);
@@ -145,8 +149,7 @@ const CafeApply = () => {
                         onReady={fetchPlaces}
                         initialCenter={{ lat: lat, lng: lng}}
                         center={{lat: lat, lng: lng}}
-                        // style={{ width: '0', height: '0' }}
-                        style={{ width: '50%' }}
+                        style={{ width: '0', height: '0' }}
                     >
                         <Marker position={{ lat: lat, lng: lng}} />
                         {
