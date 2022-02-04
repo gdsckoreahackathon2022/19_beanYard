@@ -37,14 +37,14 @@ const MainFarmer = () => {
             await axios.get(`http://27.96.134.100:8080/api/cafe?userSeq=${authContext.state.userSeq}`, config)
             .then(({ status, data }) => {
                 // console.log(status, data);
-                setInfo(data.content);
+                if(data.content) setInfo(data.content);
             })
             .catch((e) => {
                 console.log(e);
             });
         };
         getMyDonations();
-    }, [lat, lng]);
+    }, [lat, lng, authContext.state.userSeq]);
 
     const fetchPlaces = (mapProps, map) => {
         const {google} = mapProps;
@@ -72,6 +72,7 @@ const MainFarmer = () => {
             </Map>
             <div className="cafe-list">
                 {
+                    info.length ?
                     info.map((e, idx) => {
                         return (
                             <Link to={`/cafedetail/${e.cafeSeq}`} className="card-content" key={idx}>
@@ -84,7 +85,8 @@ const MainFarmer = () => {
                                 </div>
                             </Link>
                         )
-                    })
+                    }) :
+                    <div>아직 저장된 카페가 없습니다</div>
                 }
             </div>
         </div>
