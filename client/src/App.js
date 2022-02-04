@@ -3,7 +3,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import { 
   Home, 
   Login, 
-  Signup,
+  SignupCafe,
+  SignupFarmer,
   CafeDetail,
   MainCafe,
   MainFarmer,
@@ -94,7 +95,8 @@ function App() {
           <Routes>
             <Route path="/" exact={true} element={<Home />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/signup/cafe' element={<SignupCafe />} />
+            <Route path='/signup/farmer' element={<SignupFarmer />} />
             <Route path='/cafedetail/:postSeq' element={<CafeDetail />} />
             <Route path='/maincafe' element={<MainCafe />} />
             <Route path='/maincafe/apply' element={<CafeApply />} />

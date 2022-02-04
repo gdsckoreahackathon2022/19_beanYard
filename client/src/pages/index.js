@@ -1,6 +1,7 @@
 export { default as Home } from "./Home";
 export { default as Login } from "./Login";
-export { default as Signup } from "./Signup";
+export { default as SignupCafe } from "./SignupCafe";
+export { default as SignupFarmer } from "./SignupFarmer";
 export { default as CafeDetail } from "./CafeDetail";
 export { default as MainCafe } from "./MainCafe";
 export { default as CafeApply } from "./CafeApply";

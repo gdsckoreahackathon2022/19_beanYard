@@ -3,6 +3,7 @@ import { AuthContext } from "../App";
 import { postApi, getApi } from "../api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import '../styles/Signup.css';
 
 const LoginForm = () => {
     const [userData, setUserData] = useState({
@@ -18,6 +19,7 @@ const LoginForm = () => {
         userSeq: "",
     });
 
+    const [loginErrorMsg, setLoginErrorMsg] = useState("");
     const authContext = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -34,8 +36,8 @@ const LoginForm = () => {
                         }
                     }
                 )
-                console.log(res);
-                console.log(res.headers.authorization);
+                // console.log(res);
+                // console.log(res.headers.authorization);
                 await getApi(
                     {
                         userName: userData.userName,
@@ -43,9 +45,8 @@ const LoginForm = () => {
                     "/api/user"
                 )
                 .then(({ status, data }) => {
-                    console.log('status:', status);
                     if (status === 200) {
-                        console.log('getdata', data);
+                        // console.log('getdata', data);
                         setAuth({ 
                             ...auth, 
                             type: "login",
@@ -54,20 +55,22 @@ const LoginForm = () => {
                             userType: data.userType,
                             userSeq: data.userSeq,
                         })
-                    } 
+                    } else if (status === 401) {
+                        setLoginErrorMsg("Try Again!");
+                    }
                 })
                 .catch((e) => {
+                    setLoginErrorMsg("Try Again!");
                     console.log(e);
                 });
 
                 authContext.dispatch({
                     ...auth
                 });
-                console.log('auth', auth);
                 if (auth.token !== "") {
                     navigate("/"); // 로그인 성공 시 Home으로 이동
                 }
-                console.log(authContext.state);
+                // console.log(authContext.state);
             } catch (error) {
                 console.log(error);
             }
@@ -75,40 +78,40 @@ const LoginForm = () => {
         await post();
     };
 
-    
-
     return (
         <form className="Login-outer-form" onSubmit={submitHandler}>
-            <div className="Login-form-header">
+            <div className="form-group">
+                <div className="form-item">
+                    <h5>user ID</h5>
+                    <input
+                        type="text"
+                        name="userName"
+                        placeholder=""
+                        onChange={
+                            (e) => setUserData({ ...userData, userName: e.target.value })
+                        }
+                        value={userData.userName}
+                    />
+                </div>
             </div>
             <div className="form-group">
-                <h5>user ID</h5>
-                <input
-                    type="text"
-                    name="userName"
-                    placeholder=""
-                    onChange={
-                        (e) => setUserData({ ...userData, userName: e.target.value })
-                    }
-                    value={userData.userName}
-                />
-
+                <div className="form-item">
+                    <h5>Password</h5>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder=""
+                        onChange={(e) =>
+                            setUserData({ ...userData, password: e.target.value })
+                        }
+                        value={userData.password}
+                    />
+                </div>
             </div>
-            <div className="form-group">
-                <h5>Password</h5>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder=""
-                    onChange={(e) =>
-                        setUserData({ ...userData, password: e.target.value })
-                    }
-                    value={userData.password}
-                />
-            </div>
-
+            <p>{loginErrorMsg}</p>
             <br></br>
             <button
+                className="Login-button"
                 type="submit"
             >LOG IN</button>
             <br />

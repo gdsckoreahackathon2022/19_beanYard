@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { getApi, postApi } from "../api";
 import { AuthContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import '../styles/Signup.css';
 
-const SignupFormCafe = ({ history }) => {
+
+const SignupFormFarmer = () => {
     const [details, setDetails] = useState({
         userName: "",
         password: "",
         phone: "",
         vegType: "",
-        userType: "",
+        userType: "FARMER",
     });
     const [signupErrorMsg, setSignupErrorMsg] = useState("");
     const [userNameCheck, setUserNameCheck] = useState("");
     const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+    const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const checkUsername = async (e) => {
         e.preventDefault();
@@ -39,20 +44,21 @@ const SignupFormCafe = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await postApi(details, "/api/user/register")
-            .then(({ status, data }) => {
-                AuthContext.dispatch({
-                    type: "login",
-                    token: data.token,
-                    userName: details.userName,
-                    userSeq: data.userSeq,
-                    userType: data.userType,
-                });
-                
-                // history.pushState("/login"); // 성공 시 login 으로 이동
+        console.log(details);
+        await postApi({
+            userName: details.userName,
+            password: details.password,
+            phone: details.phone,
+            vegType: details.vegType,
+            userType: "FARMER",
+            },
+            "/api/user/register",
+            authContext.state.token
+            ).then(({ status, data }) => {
+                console.log(data);
+                navigate("/login"); // 회원가입 성공 시 로그인창으로 이동
             })
             .catch((e) => {
-                console.log("Signup Failed")
                 setSignupErrorMsg("Signup Failed") 
             })
     }
@@ -101,12 +107,12 @@ const SignupFormCafe = ({ history }) => {
             <div className="form-group">
                 <h5>Vegetable</h5>
                 <input
-                    name="plant"
-                    placeholder="Plant"
+                    name="vegType"
+                    placeholder=""
                     onChange={(e) =>
-                        setDetails({ ...details, plant: e.target.value })
+                        setDetails({ ...details, vegType: e.target.value })
                     }
-                    value={details.plant}
+                    value={details.vegType}
                 />
             </div>
 
@@ -120,4 +126,4 @@ const SignupFormCafe = ({ history }) => {
     );
 };
 
-export default SignupFormCafe;
+export default SignupFormFarmer;

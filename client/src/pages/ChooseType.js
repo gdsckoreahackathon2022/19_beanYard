@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../styles/Signup.css';
 
 const ChooseType = () => {
+
     return (
         <div className="ChooseType">
-            <div>Join as...</div>
-            <Link to='/signup' page="cafe">A cafe owner</Link>
-            <Link to='/signup' page="farmer">A farmer</Link>
+            <div className="ChooseType-title">Join as...</div>
+            
+            <div className="ChooseType-choose">
+                <Link to='/signup/cafe'>
+                    <div className="choose-cafe">A cafe owner</div>
+                </Link>
+                <Link to='/signup/farmer'>
+                    <div className="choose-farmer">A farmer</div>
+                </Link>
+            </div>
         </div>
     );
 };

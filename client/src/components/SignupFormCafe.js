@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { getApi, postApi } from "../api";
 import { AuthContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
-const SignupFormFarmer = ({ history }) => {
+
+const SignupFormCafe = () => {
     const [details, setDetails] = useState({
-        name: "",
         userName: "",
         password: "",
         phone: "",
-        userType: "",
         vegType: "",
+        userType: "CAFE",
     });
     const [signupErrorMsg, setSignupErrorMsg] = useState("");
     const [userNameCheck, setUserNameCheck] = useState("");
     const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+    const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const checkUsername = async (e) => {
         e.preventDefault();
@@ -40,36 +43,28 @@ const SignupFormFarmer = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await postApi(details, "/api/user/register")
-            .then(({ status, data }) => {
-                AuthContext.dispatch({
-                    type: "login",
-                    token: data.token,
-                    userName: details.userName,
-                    userSeq: data.userSeq,
-                    userType: data.userType,
-                });
-                
-                // history.pushState("/login"); // 성공 시 login 으로 이동
+        console.log(details);
+        await postApi({
+            userName: details.userName,
+            password: details.password,
+            phone: details.phone,
+            vegType: null,
+            userType: "CAFE",
+            },
+            "/api/user/register",
+            authContext.state.token
+            ).then(({ status, data }) => {
+                console.log(data);
+                navigate("/login"); // 회원가입 성공 시 로그인창으로 이동
             })
             .catch((e) => {
-                console.log("Signup Failed")
+                setSignupErrorMsg("Signup Failed") 
             })
     }
+
     return (
         <form className="Signup-outer-form" onSubmit={submitHandler}>
-            <div className="form-group">
-                <h5>Cafe Name</h5>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, userName: e.target.value })
-                    }
-                    value={details.userName}
-                />
-            </div>
+            
             <div className="form-group">
                 <h5>User ID</h5>
                 <input
@@ -120,4 +115,4 @@ const SignupFormFarmer = ({ history }) => {
     );
 };
 
-export default SignupFormFarmer;
+export default SignupFormCafe;

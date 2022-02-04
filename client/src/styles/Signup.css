@@ -1,0 +1,101 @@
+/* ChooseType */
+.ChooseType {
+    background-color: #F2F2F2;
+    width: 100vw;
+    height: 100vh;
+    color: #443826;
+    padding: 20px 0;
+}
+
+.ChooseType .ChooseType-title {
+    font-size: 2.3rem;
+    padding: 15vh 0;
+}
+
+.ChooseType .ChooseType-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10vw;
+}
+
+.choose-cafe {
+    background-color: #443826;
+    color: #F2F2F2;
+    width: 30vw;
+    height: 76px;
+    font-size: 1.7rem;
+    line-height: 70px;
+}
+
+.choose-farmer {
+    background-color: #375A48;
+    color: #F2F2F2;
+    width: 30vw;
+    height: 76px;
+    font-size: 1.7rem;
+    line-height: 70px;
+}
+
+/* Login */
+.Login-outer-form {
+    background-color: #F2F2F2;
+    width: 100vw;
+    height: 100vh;
+    color: #443826;
+    padding: 20vh 0;
+}
+
+.form-group {
+    color: #443826;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-group input {
+    width: 300px;
+    height: 30px;
+    margin: 0 30px;
+    border-bottom: 1;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: #F2F2F2;
+    border-color: #443826;
+}
+
+.Login-button {
+    background-color: #443826;
+    color:#F2F2F2;
+    border: none;
+    width: 430px;
+    height: 60px;
+    font-size: 1.3rem;
+}
+
+/* Signup */
+.Signup {
+    display: flex;
+    flex-direction: row;
+    background-color: #F2F2F2;
+    width: 100vw;
+    height: 100vh;
+    color: #443826;
+    justify-content: space-between;
+}
+
+.Signup-title {
+    padding-left: 10vw;
+    padding-top: 10vh;
+}
+
+.Signup-outer-form {
+    padding: 10vh 20vh;
+}
