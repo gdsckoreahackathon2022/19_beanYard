@@ -84,7 +84,7 @@ const CafeApply = () => {
                 time: time,
                 coffee: coffee,
                 message: description,
-                userSeq: 1
+                userSeq: authContext.state.userSeq,
             },
             "/api/cafe",
             authContext.state.token

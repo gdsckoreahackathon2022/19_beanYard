@@ -14,6 +14,7 @@ const MainCafe = () => {
 
     useEffect(() => {
         setInfo([]);
+        console.log(authContext.state.userSeq);
         const getMyDonations = async () => {
             const config = {
                 headers: {
@@ -57,7 +58,8 @@ const MainCafe = () => {
                                 <div className="content-section" key={idx}>
                                     <div>Date: <span>{ e.time.split(' ')[0] }</span></div>
                                     <div>Weight: <span>{ e.coffee } kg</span></div>
-                                    <div className="content-link">See your applicants</div>
+                                    {/* <div className="content-link">See your applicants</div> */}
+                                    <div className="content-link">Thanks for your Donation!</div>
                                 </div>
                             )) :
                             <div className="empty-title">
