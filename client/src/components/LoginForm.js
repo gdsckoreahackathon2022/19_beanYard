@@ -36,8 +36,8 @@ const LoginForm = () => {
                         }
                     }
                 )
-                // console.log(res);
-                // console.log(res.headers.authorization);
+                console.log('res', res);
+                console.log('res.auth', res.headers.authorization);
                 await getApi(
                     {
                         userName: userData.userName,
@@ -46,7 +46,7 @@ const LoginForm = () => {
                 )
                 .then(({ status, data }) => {
                     if (status === 200) {
-                        // console.log('getdata', data);
+                        console.log('getdata', data);
                         setAuth({ 
                             ...auth, 
                             type: "login",
@@ -54,7 +54,8 @@ const LoginForm = () => {
                             userName: data.userName,
                             userType: data.userType,
                             userSeq: data.userSeq,
-                        })
+                        });
+                        setLoginErrorMsg("Confirmed!");
                     } else {
                         setLoginErrorMsg("Try Again!");
                     }
@@ -67,6 +68,7 @@ const LoginForm = () => {
                 authContext.dispatch({
                     ...auth
                 });
+                
                 localStorage.setItem(
                     "loggedInfo",
                     JSON.stringify({ 
@@ -118,7 +120,11 @@ const LoginForm = () => {
                     />
                 </div>
             </div>
-            <p className="login-error-text">{loginErrorMsg}</p>
+            <p className= {loginErrorMsg === "Confirmed!" ? 
+                "login-confirm-text" : 
+                "login-error-text"}>
+                {loginErrorMsg}
+            </p>
             <br></br>
             <button
                 className="Login-button"

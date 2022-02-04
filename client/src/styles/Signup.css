@@ -83,6 +83,10 @@
     font-size: 1.3rem;
 }
 
+.login-again-text {
+    color: #443826;
+}
+
 .login-error-text {
     color: red;
 }
