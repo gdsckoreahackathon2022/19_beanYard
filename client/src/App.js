@@ -88,6 +88,7 @@ function App() {
     token: 'tmp',
     userName: null,
     userType: 'C',
+    userSeq: 1,
   });
 
   return (

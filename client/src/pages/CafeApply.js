@@ -74,13 +74,7 @@ const CafeApply = () => {
             latitude = markers[0].loc.lat();
             longitude = markers[0].loc.lng();
         }
-
-        // console.log(donateForm.current.cafeName.value);
-        // console.log(donateForm.current.locationName.value);
-        // console.log(dayjs(donateForm.current.dateTime.value).format('YYYY-MM-DD HH:MM:ss'));
-        // console.log(donateForm.current.coffeeSize.value);
-        // console.log(donateForm.current.description.value);
-        // console.log(markers[0])
+        
         await postApi(
             {
                 name: cafeName,
