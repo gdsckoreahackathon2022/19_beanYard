@@ -3,6 +3,7 @@ export { default as Login } from "./Login";
 export { default as Signup } from "./Signup";
 export { default as CafeDetail } from "./CafeDetail";
 export { default as MainCafe } from "./MainCafe";
+export { default as CafeApply } from "./CafeApply";
 export { default as MainFarmer } from "./MainFarmer";
 export { default as MyPageCafe } from "./MyPageCafe";
 export { default as MyPageFarmer } from "./MyPageFarmer";

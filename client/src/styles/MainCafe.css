@@ -1,0 +1,50 @@
+.main-cafe {
+    margin-top: 15vh;
+}
+
+.btn-section {
+    float: right;
+    margin-right: 5vw;
+}
+
+.donation-btn {
+    background: #3C64B1;
+    color: white;
+    width: 150px;
+    padding: 12px 15px;
+    font-size: 14px;
+}
+
+.donation-list {
+    width: 50%;
+    margin: 10vh 5vw 0;
+}
+
+.donation-list-title {
+    font-size: 23px;
+    text-align: left;
+    margin-bottom: 4vh;
+    font-weight: 500;
+}
+
+.content-section {
+    background: #F4F4F4;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 3vh;
+    font-size: 14px;
+    line-height: 180%;
+}
+
+.content-link {
+    font-size: 12px;
+    margin-top: 3vh;
+}
+
+.empty-title {
+    text-align: left;
+    font-size: 22px;
+    color: #737B7D;
+    line-height: 170%;
+    font-weight: 200;
+}
