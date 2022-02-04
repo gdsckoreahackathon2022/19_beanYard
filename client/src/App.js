@@ -16,8 +16,6 @@ import {
   useReducer,
   createContext,
   useContext,
-  useEffect,
-  useState,
 } from "react";
 
 
@@ -36,7 +34,7 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          {authContext.state.userType ? (
+          {authContext.state.userType === 'c' ? (
           <div>
             <Link to="/maincafe">Main</Link>
             <Link to="/mypagecafe">Cafe Owner</Link>
@@ -49,7 +47,6 @@ const Header = () => {
           )}
         </div>
       )}
-      
     </header>
   );
 }
@@ -73,7 +70,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
-    token: null,
+    token: 'tmp',
     userName: null,
     userType: 'c',
   });
