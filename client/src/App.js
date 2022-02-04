@@ -130,7 +130,7 @@ function App() {
             });
         }
     };
-    // initUserInfo();
+    initUserInfo();
   }, [state.token]);
 
   return (

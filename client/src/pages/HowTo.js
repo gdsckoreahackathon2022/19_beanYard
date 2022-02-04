@@ -8,8 +8,8 @@ const HowTo = () => {
             <ReactPlayer
                     className='react-player'
                     url={'https://youtu.be/aNwPdOY_5-o'}    // 플레이어 url
-                    width='800px'         // 플레이어 크기 (가로)
-                    height='500px'        // 플레이어 크기 (세로)
+                    width='60vw'         // 플레이어 크기 (가로)
+                    height='35vw'        // 플레이어 크기 (세로)
                     playing={false}        // 자동 재생 on
                     muted={false}          // 자동 재생 on
                     controls={true}       // 플레이어 컨트롤 노출 여부
