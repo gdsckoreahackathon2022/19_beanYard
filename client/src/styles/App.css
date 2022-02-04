@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #F2F2F2;
 }
 
 .App-logo {
@@ -40,4 +41,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.header-links {
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  margin: 0 12px;
+}
+
+.my-page-plain {
+  color: #443826;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.my-page-btn {
+  background-color: #443826;
+  color: white !important;
+  font-size: 14px;
+  padding: 5px 12px;
+  margin: 0 10px !important;
 }

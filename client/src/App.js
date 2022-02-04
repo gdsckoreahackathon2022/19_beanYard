@@ -18,36 +18,50 @@ import {
   createContext,
   useContext,
 } from "react";
-
+import {ReactComponent as Logo} from './assets/logo.svg';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
   return (
     <header className="App-header">
-      <div>Logo</div>
-      <Link to="/">About Us</Link>
-      <Link to="/howto">How To</Link>
-
-      {!authContext.state.token ? (
-        <div className="App-header-Login">
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      ) : (
-        <div>
-          {authContext.state.userType === 'CAFE' ? (
-          <div>
-            <Link to="/maincafe">Main</Link>
-            <Link to="/mypagecafe">Cafe Owner</Link>
+      <Logo width={60} height={60} />
+      <div className="header-links">
+        {!authContext.state.token ? (
+          <div className="App-header-Login">
+            <Link to="/">About Us</Link>
+            <Link to="/howto">How To</Link>
+            <Link to="/login" className='my-page-plain'>Login</Link>
+            <Link to="/signup" className='my-page-plain'>Sign Up</Link>
           </div>
-          ) : (
-          <div>
-            <Link to="/mainfarmer">Main</Link>
-            <Link to="/mypagefarmer">Farmer</Link>
-          </div>
-          )}
-        </div>
-      )}
+        ) : (
+          <>
+            {authContext.state.userType === 'C' ? (
+              <div>
+                <Link to="/">About Us</Link>
+                <Link to="/howto">How To</Link>
+                <Link to="/maincafe">Main</Link>
+              </div>
+              ) : (
+              <div>
+                <Link to="/">About Us</Link>
+                <Link to="/howto">How To</Link>
+                <Link to="/mainfarmer">Main</Link>
+              </div>
+            )}
+            {authContext.state.userType === 'C' ? (
+                <div>
+                  <Link to="/" className='my-page-plain'>Logout</Link>
+                  <Link to="/mypagecafe" className='my-page-btn'>My Page</Link>
+                </div>
+              ) : (
+                <div>
+                  <Link to="/" className='my-page-plain'>Log Out</Link>
+                  <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
+                </div>
+            )}
+          </>
+        )}
+      </div>
     </header>
   );
 }
@@ -73,7 +87,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     token: 'tmp',
     userName: null,
-    userType: 'f',
+    userType: 'C',
   });
 
   return (
