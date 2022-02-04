@@ -37,13 +37,21 @@ const Header = () => {
               <Link to="/howto">How To</Link>
             </div>
             <div>
-              <Link to="/login" className='my-page-plain'>Login</Link>
-              <Link to="/choosetype" className='my-page-plain'>Sign Up</Link>
+              <Link to="/login" className="my-page-plain">
+                Login
+              </Link>
+              <Link to="/choosetype" className="my-page-plain">
+                Sign Up
+              </Link>
             </div>
           </>
         ) : (
           <>
+<<<<<<< HEAD
+            {authContext.state.userType === "CAFE" ? (
+=======
             {authContext.state.userType === 'CAFE' ? (
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
               <div>
                 <Link to="/">About Us</Link>
                 <Link to="/howto">How To</Link>
@@ -56,6 +64,28 @@ const Header = () => {
                 <Link to="/mainfarmer">Main</Link>
               </div>
             )}
+<<<<<<< HEAD
+            {authContext.state.userType === "CAFE" ? (
+              <div>
+                <Link to="/" className="my-page-plain">
+                  Log Out
+                </Link>
+                <Link to="/mypagecafe" className="my-page-btn">
+                  My Page
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Link to="/" className="my-page-plain">
+                  Log Out
+                </Link>
+                <Link to="/mypagefarmer" className="my-page-btn">
+                  My Page
+                </Link>
+              </div>
+            )}
+            <div>{authContext.state.userType === "CAFE"}</div>
+=======
             {authContext.state.userType === 'CAFE' ? (
                 <div>
                   <Link to="/logout" className='my-page-plain'>Log Out</Link>
@@ -67,6 +97,7 @@ const Header = () => {
                   <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
                 </div>
             )}
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
           </>
         )}
       </div>
