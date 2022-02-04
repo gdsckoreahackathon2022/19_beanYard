@@ -1,17 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import '../styles/MainCafe.css';
+import { AuthContext } from "../App";
+import { getApi } from "../api";
 import dayjs from 'dayjs';
+import axios from "axios";
 
 const MainCafe = () => {
+    const authContext = useContext(AuthContext);
     const date = dayjs(new Date()).format('YYYY. MM. DD');
-    const weight = 2;
 
     const [info, setInfo] = useState([]);
 
     useEffect(() => {
-        setInfo([])
-    }, [date]);
+        setInfo([]);
+        const getMyDonations = async () => {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                    Accept: "application/json",
+                },
+            };
+            // const token = authContext.state.token;
+            // if (token) {
+            //     config.headers["Authorization"] = `Bearer ${token}`;
+            // }
+            await axios.get(`http://27.96.134.100:8080/api/cafe?userSeq=${authContext.state.userSeq}`, config)
+            .then(({ status, data }) => {
+                console.log(status, data);
+                setInfo(data.content);
+                // if (status === 200) {
+                //     console.log(data);
+                //     setCafeData({
+                //         postSeq: data.postSeq,
+                //         cafename: data.cafename,
+                //         location: data.location,
+                //         time: data.time,
+                //         coffee: data.coffee,
+                //         message: data.message,
+                //     });
+                // }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+        };
+        getMyDonations();
+    }, [date, authContext.state.token, authContext.state.userSeq]);
 
     return (
         <div className="main-cafe">
@@ -29,10 +64,10 @@ const MainCafe = () => {
                 <div className="donation-list-contents">
                     {
                         info.length ?
-                            info.map((e) => (
-                                <div className="content-section">
-                                    <div>Date: <span>{ e.date }</span></div>
-                                    <div>Weight: <span>{ e.weight } kg</span></div>
+                            info.map((e, idx) => (
+                                <div className="content-section" key={idx}>
+                                    <div>Date: <span>{ e.time.split(' ')[0] }</span></div>
+                                    <div>Weight: <span>{ e.coffee } kg</span></div>
                                     <div className="content-link">See your applicants</div>
                                 </div>
                             )) :

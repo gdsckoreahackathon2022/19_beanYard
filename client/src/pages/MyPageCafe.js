@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../App";
 import { getApi } from "../api";
+import '../styles/MyPageCafe.css';
 
 const MyPageCafe = () => {
-
     const authContext = useContext(AuthContext);
-    const [cafeName, setCafeName] = useState("");
+    const [cafeName, setCafeName] = useState("CAFE");
     const [totalCoffee, setTotalCoffee] = useState(0);
 
     useEffect(() => {
@@ -31,15 +31,17 @@ const MyPageCafe = () => {
     }, []);
 
     return (
-        <div>
+        <div className="my-page-cafe">
             <div>
                 {cafeName}
             </div>
-            <div>
+            {/* <div>
                 작물 일러스트
-            </div>
+            </div> */}
             <div>
-                지금까지 기부한 커피박은 {totalCoffee} kg 입니다.
+                The coffee gourd You've donated so far is
+                <span style={{ fontWeight: 'bold' }}> {totalCoffee} </span>
+                <span>kg.</span>
             </div>
         </div>
     );

@@ -3,13 +3,24 @@
     width: 100vw;
     height: 100vh;
     color: #F2F2F2;
-    padding: 20px 0;
+    padding: 8vh 0;
+}
+
+.logo {
+    width: 45%;
+    display: inline-block;
+    text-align: left;
+}
+
+.logo-title {
+    font-size: 26px;
+    margin-bottom: 5vh;
 }
 
 .form {
-    width: 40%;
+    width: 45%;
     text-align: left;
-    margin: 8vh calc(55% - 5px);
+    display: inline-block;
 }
 
 .form input, .form textarea {
@@ -20,6 +31,7 @@
     border-bottom: 1px solid white;
     color: #F2F2F2;
     padding: 2px;
+    position: relative !important;
 }
 
 .form textarea {
@@ -37,13 +49,15 @@
 }
 
 .submit-btn {
-    width: 100%;
-    padding: 14px 0;
+    width: 25%;
+    padding: 10px 0;
     margin-bottom: 10px;
+    position: absolute;
 }
 
 .react-datetime-picker {
-    margin: -10px 0;
+    margin: -50px 0 -20px;
+    display: block !important;
 }
 
 .react-datetime-picker__wrapper, .react-datetime-picker__inputGroup {
