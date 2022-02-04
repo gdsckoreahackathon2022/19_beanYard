@@ -1,4 +1,4 @@
-import './styles/App.css';
+import "./styles/App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { 
   Home, 
@@ -16,18 +16,13 @@ import {
   ChooseType,
   NotFound,
 } from "./pages";
-import {
-  useReducer,
-  createContext,
-  useContext,
-} from "react";
-import {ReactComponent as Logo} from './assets/logo.svg';
+import { useReducer, createContext, useContext } from "react";
+import { ReactComponent as Logo } from "./assets/logo.svg";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
   return (
     <header className="App-header">
-
       <Logo width={60} height={60} />
       <div className="header-links">
         {!authContext.state.token ? (
@@ -49,7 +44,7 @@ const Header = () => {
                 <Link to="/howto">How To</Link>
                 <Link to="/maincafe">Main</Link>
               </div>
-              ) : (
+            ) : (
               <div>
                 <Link to="/">About Us</Link>
                 <Link to="/howto">How To</Link>
@@ -73,7 +68,7 @@ const Header = () => {
       </div>
     </header>
   );
-}
+};
 
 export const AuthContext = createContext();
 
@@ -81,27 +76,26 @@ const reducer = (state, action) => {
   switch (action.type) {
     // userSeq : token이랑 같이 백에 넘기기
     // userType : cafe or farmer 구분
-      case "login":
-          return { 
-            token: action.token, 
-            userName: action.userName, 
-            userType: action.userType, 
-            userSeq: action.userSeq 
-          };
-      case "logout":
-          return { 
-            token: null, 
-            userName: null, 
-            userType: null, 
-            userSeq: null,
-          };
-      default:
-          return state;
+    case "login":
+      return {
+        token: action.token,
+        userName: action.userName,
+        userType: action.userType,
+        userSeq: action.userSeq,
+      };
+    case "logout":
+      return {
+        token: null,
+        userName: null,
+        userType: null,
+        userSeq: null,
+      };
+    default:
+      return state;
   }
 };
 
 function App() {
-  
   const [state, dispatch] = useReducer(reducer, {
     token: null,
     userName: null,
