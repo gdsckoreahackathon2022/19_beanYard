@@ -1,0 +1,42 @@
+.main-cafe {
+    background-color: #443826;
+    width: 100vw;
+    height: 100vh;
+    color: #F2F2F2;
+    padding: 20px 0;
+}
+
+.form {
+    width: 35%;
+    text-align: left;
+    margin: 5vh calc(55% - 5px);
+}
+
+.form input, .form textarea {
+    width: 98%;
+    margin: 15px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: #F2F2F2;
+    padding: 2px;
+}
+
+.form textarea {
+    height: 80px;
+    resize: none;
+}
+
+.form input:focus, .form textarea:focus {
+    outline: none;
+}
+
+.coffeeSize {
+    width: 92% !important;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px 0;
+    margin-bottom: 10px;
+}
