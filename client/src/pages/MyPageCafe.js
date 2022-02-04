@@ -5,36 +5,35 @@ import '../styles/MyPageCafe.css';
 
 const MyPageCafe = () => {
     const authContext = useContext(AuthContext);
-    const [cafeName, setCafeName] = useState("CAFE");
+    // const [cafeName, setCafeName] = useState("CAFE");
     const [totalCoffee, setTotalCoffee] = useState(0);
 
     useEffect(() => {
         const getCafeProfile = async () => {
+            console.log(authContext);
             await getApi(
-                {
-                    userName: authContext.state.userName,
-                },
-                "/mypage/cafe",
+                { userName: authContext.state.userName },
+                `/api/user`,
                 authContext.state.token
             )
             .then(({ status, data }) => {
+                console.log(data)
                 if (status === 200) {
-                    setCafeName(data.cafeName);
-                    setTotalCoffee(data.totalCoffee);
+                    setTotalCoffee(data.coffee);
                 };
             })
             .catch((e) => {
                 console.log(e);
             });
         };
-        // getCafeProfile();
+        getCafeProfile();
     }, []);
 
     return (
         <div className="my-page-cafe">
-            <div>
+            {/* <div>
                 {cafeName}
-            </div>
+            </div> */}
             {/* <div>
                 작물 일러스트
             </div> */}

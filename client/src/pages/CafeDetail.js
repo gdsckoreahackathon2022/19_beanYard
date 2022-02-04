@@ -35,13 +35,14 @@ const CafeDetail = () => {
     const apply = async () => {
         await postApi(
             {
-                userSeq: cafeData.userSeq,
+                userSeq: authContext.state.userSeq,
                 cafeSeq: cafeData.cafeSeq,
             },
             "/api/apply",
             authContext.state.token
         )
         .then(({ status, data }) => {
+            console.log(status);
             if(status === 200 || status === 201 || status === 204) {
                 alert('신청이 완료되었습니다.');
                 window.history.back(-1);
