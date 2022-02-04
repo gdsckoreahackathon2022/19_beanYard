@@ -64,23 +64,32 @@ const SignupFormCafe = () => {
 
     return (
         <form className="Signup-outer-form" onSubmit={submitHandler}>
-            
-            <div className="form-group">
-                <h5>User ID</h5>
-                <input
-                    type="text"
-                    name="userName"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, userName: e.target.value })
-                    }
-                    value={details.userName}
-                />
+            <div className="form-group-userid">
+                <div className="form-group">
+                    <h5>User ID</h5>
+                    <div className="userid-input">
+                        <input
+                            type="text"
+                            name="userName"
+                            placeholder=""
+                            onChange={(e) =>
+                                setDetails({ ...details, userName: e.target.value })
+                            }
+                            value={details.userName}
+                        />
+                        <button
+                        className="userid-check-button"
+                        onClick={checkUsername}
+                        >Check</button>
+                    </div>
+                    <p className={
+                        userNameCheck === "Available!" ? 
+                        "username-check-text-true" : 
+                        "username-check-text-false"
+                    }>{userNameCheck}</p>
+                </div>
+
             </div>
-            <button
-                    onClick={checkUsername}
-                >Check</button>
-                <p>{userNameCheck}</p>
             <div className="form-group">
                 <h5>Password</h5>
                 <input
@@ -108,6 +117,7 @@ const SignupFormCafe = () => {
             <p>{signupErrorMsg}</p>
             <br></br>
             <button 
+                className="Signup-submit-button"
                 type="submit"
                 disabled={!isUserNameChecked}
             >Sign Up</button>

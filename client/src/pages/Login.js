@@ -4,9 +4,7 @@ import '../styles/Signup.css';
 
 const Login = () => {
     return (
-        <div>
-            <LoginForm />
-        </div>
+        <LoginForm />
     );
 };
 
