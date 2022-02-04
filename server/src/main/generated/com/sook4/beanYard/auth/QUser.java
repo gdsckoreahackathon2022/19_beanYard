@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -19,11 +20,15 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
-
     public final StringPath password = createString("password");
 
+    public final ListPath<com.sook4.beanYard.api.entity.apply.Apply, com.sook4.beanYard.api.entity.apply.QApply> userApply = this.<com.sook4.beanYard.api.entity.apply.Apply, com.sook4.beanYard.api.entity.apply.QApply>createList("userApply", com.sook4.beanYard.api.entity.apply.Apply.class, com.sook4.beanYard.api.entity.apply.QApply.class, PathInits.DIRECT2);
+
+    public final ListPath<com.sook4.beanYard.api.entity.cafe.Cafe, com.sook4.beanYard.api.entity.cafe.QCafe> userCafes = this.<com.sook4.beanYard.api.entity.cafe.Cafe, com.sook4.beanYard.api.entity.cafe.QCafe>createList("userCafes", com.sook4.beanYard.api.entity.cafe.Cafe.class, com.sook4.beanYard.api.entity.cafe.QCafe.class, PathInits.DIRECT2);
+
     public final StringPath userName = createString("userName");
+
+    public final NumberPath<Long> userSeq = createNumber("userSeq", Long.class);
 
     public final EnumPath<UserType> userType = createEnum("userType", UserType.class);
 

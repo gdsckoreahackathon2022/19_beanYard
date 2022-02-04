@@ -39,7 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/hello").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
+                //.anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new LoginFilter("/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
