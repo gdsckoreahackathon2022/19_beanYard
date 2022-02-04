@@ -1,51 +1,71 @@
-import React, { useState } from "react";
-import { postApi } from "../api";
+import React, { useState, useContext } from "react";
+import { getApi, postApi } from "../api";
 import { AuthContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import '../styles/Signup.css';
 
-const SignupFormFarmer = ({ history }) => {
+
+const SignupFormFarmer = () => {
     const [details, setDetails] = useState({
-        name: "",
         userName: "",
         password: "",
         phone: "",
-        cafe: "",
+        vegType: "",
+        userType: "FARMER",
     });
     const [signupErrorMsg, setSignupErrorMsg] = useState("");
+    const [userNameCheck, setUserNameCheck] = useState("");
+    const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+    const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const checkUsername = async (e) => {
+        e.preventDefault();
+        await getApi(
+            {
+                userName: details.userName,
+            },
+            "/api/user"
+        )
+        .then(({ status, data }) => {
+            console.log('status:', status);
+            if (status === 204) {
+                setUserNameCheck("Available!");
+                setIsUserNameChecked(true);
+            } else {
+                setUserNameCheck("Duplicated ID. Try another.");
+                setIsUserNameChecked(false);
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await postApi(details, "/api/user/register")
-            .then(({ status, data }) => {
-                AuthContext.dispatch({
-                    type: "FarmerLogin",
-                    token: data.token,
-                    userName: details.userName,
-                    userType: 'f',
-                });
-                
-                history.pushState("/login"); // 성공 시 login 으로 이동
+        console.log(details);
+        await postApi({
+            userName: details.userName,
+            password: details.password,
+            phone: details.phone,
+            vegType: details.vegType,
+            userType: "FARMER",
+            },
+            "/api/user/register",
+            authContext.state.token
+            ).then(({ status, data }) => {
+                console.log(data);
+                navigate("/login"); // 회원가입 성공 시 로그인창으로 이동
             })
             .catch((e) => {
-                console.log("Signup Failed")
                 setSignupErrorMsg("Signup Failed") 
             })
     }
     return (
         <form className="Signup-outer-form" onSubmit={submitHandler}>
             <div className="form-group">
-                <h5>NAME</h5>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, userName: e.target.value })
-                    }
-                    value={details.userName}
-                />
-            </div>
-            <div className="form-group">
-                <h5>ID</h5>
+                <h5>User ID</h5>
                 <input
                     type="text"
                     name="userName"
@@ -56,8 +76,12 @@ const SignupFormFarmer = ({ history }) => {
                     value={details.userName}
                 />
             </div>
+            <button
+                    onClick={checkUsername}
+                >Check</button>
+                <p>{userNameCheck}</p>
             <div className="form-group">
-                <h5>PASSWORD</h5>
+                <h5>Password</h5>
                 <input
                     type="password"
                     name="password"
@@ -69,7 +93,7 @@ const SignupFormFarmer = ({ history }) => {
                 />
             </div>
             <div className="form-group">
-                <h5>PHONE NUMBER</h5>
+                <h5>Phone</h5>
                 <input
                     name="phone"
                     placeholder=""
@@ -79,14 +103,25 @@ const SignupFormFarmer = ({ history }) => {
                     value={details.phone}
                 />
             </div>
+
             <div className="form-group">
-                <h5>CAFE</h5>
-                
+                <h5>Vegetable</h5>
+                <input
+                    name="vegType"
+                    placeholder=""
+                    onChange={(e) =>
+                        setDetails({ ...details, vegType: e.target.value })
+                    }
+                    value={details.vegType}
+                />
             </div>
 
             <p>{signupErrorMsg}</p>
             <br></br>
-            <button type="submit">Sign Up</button>
+            <button 
+                type="submit"
+                disabled={!isUserNameChecked}
+            >Sign Up</button>
         </form>
     );
 };
