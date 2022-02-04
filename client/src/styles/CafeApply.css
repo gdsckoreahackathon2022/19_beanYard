@@ -1,0 +1,65 @@
+.cafe-apply {
+    background-color: #443826;
+    width: 100vw;
+    height: 100vh;
+    color: #F2F2F2;
+    padding: 20px 0;
+}
+
+.form {
+    width: 40%;
+    text-align: left;
+    margin: 8vh calc(55% - 5px);
+}
+
+.form input, .form textarea {
+    width: 98%;
+    margin: 10px 0 20px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: #F2F2F2;
+    padding: 2px;
+}
+
+.form textarea {
+    height: 80px;
+    resize: none;
+}
+
+.form input:focus, .form textarea:focus {
+    outline: none;
+}
+
+.coffeeSize {
+    width: 92% !important;
+    margin: 0px 0 25px !important;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px 0;
+    margin-bottom: 10px;
+}
+
+.react-datetime-picker {
+    margin: -10px 0;
+}
+
+.react-datetime-picker__wrapper, .react-datetime-picker__inputGroup {
+    display: block !important;
+    border: none !important;
+    border-bottom: 1px solid white;
+    width: 100% !important;
+    color: #F2F2F2;
+}
+
+.react-datetime-picker__wrapper > input, .react-datetime-picker__wrapper > textarea,
+.react-datetime-picker__inputGroup > input, .react-datetime-picker__inputGroup > textarea {
+    border: none;
+}
+
+.react-datetime-picker__inputGroup__amPm {
+    color: #F2F2F2;
+    background: #443826 !important;
+}

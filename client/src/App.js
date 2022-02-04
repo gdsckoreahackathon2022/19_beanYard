@@ -8,6 +8,7 @@ import {
   MainCafe,
   MainFarmer,
   MyPageCafe,
+  CafeApply,
   MyPageFarmer,
   HowTo,
   NotFound,
@@ -85,6 +86,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/cafedetail' element={<CafeDetail />} />
             <Route path='/maincafe' element={<MainCafe />} />
+            <Route path='/maincafe/apply' element={<CafeApply />} />
             <Route path='/mainfarmer' element={<MainFarmer />} />
             <Route path='/mypagecafe' element={<MyPageCafe />} />
             <Route path='/mypagefarmer' element={<MyPageFarmer />} />

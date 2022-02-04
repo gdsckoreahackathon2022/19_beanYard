@@ -1,42 +1,50 @@
 .main-cafe {
-    background-color: #443826;
-    width: 100vw;
-    height: 100vh;
-    color: #F2F2F2;
-    padding: 20px 0;
+    margin-top: 15vh;
 }
 
-.form {
-    width: 35%;
+.btn-section {
+    float: right;
+    margin-right: 5vw;
+}
+
+.donation-btn {
+    background: #3C64B1;
+    color: white;
+    width: 150px;
+    padding: 12px 15px;
+    font-size: 14px;
+}
+
+.donation-list {
+    width: 50%;
+    margin: 10vh 5vw 0;
+}
+
+.donation-list-title {
+    font-size: 23px;
     text-align: left;
-    margin: 5vh calc(55% - 5px);
+    margin-bottom: 4vh;
+    font-weight: 500;
 }
 
-.form input, .form textarea {
-    width: 98%;
-    margin: 15px 0;
-    background: none;
-    border: none;
-    border-bottom: 1px solid white;
-    color: #F2F2F2;
-    padding: 2px;
+.content-section {
+    background: #F4F4F4;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 3vh;
+    font-size: 14px;
+    line-height: 180%;
 }
 
-.form textarea {
-    height: 80px;
-    resize: none;
+.content-link {
+    font-size: 12px;
+    margin-top: 3vh;
 }
 
-.form input:focus, .form textarea:focus {
-    outline: none;
-}
-
-.coffeeSize {
-    width: 92% !important;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 14px 0;
-    margin-bottom: 10px;
+.empty-title {
+    text-align: left;
+    font-size: 22px;
+    color: #737B7D;
+    line-height: 170%;
+    font-weight: 200;
 }
