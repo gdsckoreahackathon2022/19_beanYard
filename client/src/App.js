@@ -62,7 +62,6 @@ const Header = () => {
                   <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
                 </div>
             )}
-            <div>{ authContext.state.userType === 'CAFE'  }</div>
           </>
         )}
       </div>
