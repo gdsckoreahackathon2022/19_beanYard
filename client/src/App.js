@@ -1,8 +1,9 @@
 import "./styles/App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import {
-  Home,
-  Login,
+import { 
+  Home, 
+  Login, 
+  Logout,
   SignupCafe,
   SignupFarmer,
   CafeDetail,
@@ -15,8 +16,13 @@ import {
   ChooseType,
   NotFound,
 } from "./pages";
-import { useReducer, createContext, useContext } from "react";
-import { ReactComponent as Logo } from "./assets/logo.svg";
+import {
+  useReducer,
+  createContext,
+  useContext,
+  useEffect,
+} from "react";
+import {ReactComponent as Logo} from './assets/logo.svg';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
@@ -41,7 +47,11 @@ const Header = () => {
           </>
         ) : (
           <>
+<<<<<<< HEAD
             {authContext.state.userType === "CAFE" ? (
+=======
+            {authContext.state.userType === 'CAFE' ? (
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
               <div>
                 <Link to="/">About Us</Link>
                 <Link to="/howto">How To</Link>
@@ -54,6 +64,7 @@ const Header = () => {
                 <Link to="/mainfarmer">Main</Link>
               </div>
             )}
+<<<<<<< HEAD
             {authContext.state.userType === "CAFE" ? (
               <div>
                 <Link to="/" className="my-page-plain">
@@ -74,6 +85,19 @@ const Header = () => {
               </div>
             )}
             <div>{authContext.state.userType === "CAFE"}</div>
+=======
+            {authContext.state.userType === 'CAFE' ? (
+                <div>
+                  <Link to="/logout" className='my-page-plain'>Log Out</Link>
+                  <Link to="/mypagecafe" className='my-page-btn'>My Page</Link>
+                </div>
+              ) : (
+                <div>
+                  <Link to="/logout" className='my-page-plain' >Log Out</Link>
+                  <Link to="/mypagefarmer" className='my-page-btn'>My Page</Link>
+                </div>
+            )}
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
           </>
         )}
       </div>
@@ -114,25 +138,54 @@ function App() {
     userSeq: null,
   });
 
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("loggedInfo")));
+
+    const initUserInfo = async () => {
+        const loggedInfo = await JSON.parse(
+            localStorage.getItem("loggedInfo")
+        );
+        console.log("-------------새로 고침------------");
+        console.log(loggedInfo);
+
+        if (loggedInfo) {
+            const { token, userName, userType, userSeq } = loggedInfo;
+            await dispatch({
+                type: "login",
+                token: token,
+                userName: userName,
+                userType: userType,
+                userSeq: userSeq,
+            });
+        } else {
+            await dispatch({
+                type: "logout",
+            });
+        }
+    };
+    initUserInfo();
+  }, [state.token]);
+
   return (
     <div className="App">
       <AuthContext.Provider value={{ state, dispatch }}>
         <Header />
-        <Routes>
-          <Route path="/" exact={true} element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup/cafe" element={<SignupCafe />} />
-          <Route path="/signup/farmer" element={<SignupFarmer />} />
-          <Route path="/cafedetail/:postSeq" element={<CafeDetail />} />
-          <Route path="/maincafe" element={<MainCafe />} />
-          <Route path="/maincafe/apply" element={<CafeApply />} />
-          <Route path="/mainfarmer" element={<MainFarmer />} />
-          <Route path="/mypagecafe" element={<MyPageCafe />} />
-          <Route path="/mypagefarmer" element={<MyPageFarmer />} />
-          <Route path="/howto" element={<HowTo />} />
-          <Route path="/choosetype" element={<ChooseType />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+            <Route path="/" exact={true} element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/signup/cafe' element={<SignupCafe />} />
+            <Route path='/signup/farmer' element={<SignupFarmer />} />
+            <Route path='/cafedetail/:postSeq' element={<CafeDetail />} />
+            <Route path='/maincafe' element={<MainCafe />} />
+            <Route path='/maincafe/apply' element={<CafeApply />} />
+            <Route path='/mainfarmer' element={<MainFarmer />} />
+            <Route path='/mypagecafe' element={<MyPageCafe />} />
+            <Route path='/mypagefarmer' element={<MyPageFarmer />} />
+            <Route path='/howto' element={<HowTo />} />
+            <Route path='/choosetype' element={<ChooseType />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
       </AuthContext.Provider>
     </div>
   );

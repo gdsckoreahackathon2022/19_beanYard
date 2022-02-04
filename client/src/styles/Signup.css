@@ -62,13 +62,16 @@
 .form-group input {
     width: 300px;
     height: 30px;
-    margin: 0 30px;
     border-bottom: 1;
     border-top: 0;
     border-left: 0;
     border-right: 0;
     background-color: #F2F2F2;
     border-color: #443826;
+}
+
+.form-item input {
+    margin: 0 20px;
 }
 
 .Login-button {
@@ -78,6 +81,14 @@
     width: 430px;
     height: 60px;
     font-size: 1.3rem;
+}
+
+.login-again-text {
+    color: #443826;
+}
+
+.login-error-text {
+    color: red;
 }
 
 /* Signup */
@@ -98,4 +109,62 @@
 
 .Signup-outer-form {
     padding: 10vh 20vh;
+    display: flex;
+    flex-direction: column;
 }
+
+.Signup-outer-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.Signup-outer-form .form-group h5 {
+    margin: 0;
+    padding: 10px 0 0 0;
+    margin-right: auto;
+}
+
+.Signup-outer-form button {
+    cursor: pointer;
+}
+
+.form-group-userid {
+    display: flex;
+    flex-direction: row;
+}
+
+.userid-check-button {
+    height: 30px;
+    background-color: #E5E5E5;
+    color: #443826;
+    font-size: 0.5rem;
+}
+
+.Signup-submit-button {
+    height: 50px;
+    color: #E5E5E5;
+    background-color: #443826;
+    font-size: 1rem;
+}
+
+.userid-input input {
+    width: 250px;
+}
+
+.username-check-text-true,
+.username-check-text-false
+ {
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+    margin-left: auto;
+}
+
+.username-check-text-true {
+    color: green;
+}
+
+.username-check-text-false {
+    color: red;
+}
+

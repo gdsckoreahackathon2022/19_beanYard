@@ -10,10 +10,7 @@ const SignupFarmer = () => {
                 <h2>Join us!</h2>
                 <p>Fill out the form and...</p>
             </div>
-            <div>
                 <SignupFormFarmer />
-            </div>
-            
         </div>
     );
 };

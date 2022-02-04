@@ -34,7 +34,7 @@ const MainFarmer = () => {
             // if (token) {
             //     config.headers["Authorization"] = `Bearer ${token}`;
             // }
-            await axios.get(`http://27.96.134.100:8080/api/cafe?userSeq=${authContext.state.userSeq}`, config)
+            await axios.get(`http://27.96.134.100:8080/api/cafe`, config)
             .then(({ status, data }) => {
                 // console.log(status, data);
                 if(data.content) setInfo(data.content);
@@ -70,7 +70,7 @@ const MainFarmer = () => {
                     })
                 }
             </Map>
-            <div className="cafe-list">
+            <div className="farmer-cafe-list">
                 {
                     info.length ?
                     info.map((e, idx) => {

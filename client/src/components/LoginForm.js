@@ -36,8 +36,8 @@ const LoginForm = () => {
                         }
                     }
                 )
-                // console.log(res);
-                // console.log(res.headers.authorization);
+                console.log('res', res);
+                console.log('res.auth', res.headers.authorization);
                 await getApi(
                     {
                         userName: userData.userName,
@@ -46,7 +46,7 @@ const LoginForm = () => {
                 )
                 .then(({ status, data }) => {
                     if (status === 200) {
-                        // console.log('getdata', data);
+                        console.log('getdata', data);
                         setAuth({ 
                             ...auth, 
                             type: "login",
@@ -54,8 +54,9 @@ const LoginForm = () => {
                             userName: data.userName,
                             userType: data.userType,
                             userSeq: data.userSeq,
-                        })
-                    } else if (status === 401) {
+                        });
+                        setLoginErrorMsg("Confirmed!");
+                    } else {
                         setLoginErrorMsg("Try Again!");
                     }
                 })
@@ -67,12 +68,23 @@ const LoginForm = () => {
                 authContext.dispatch({
                     ...auth
                 });
+                
+                localStorage.setItem(
+                    "loggedInfo",
+                    JSON.stringify({ 
+                        token: auth.token,
+                        userType: auth.userType,
+                        userName: auth.userName,
+                        userSeq: auth.userSeq,
+                    })
+                );
                 if (auth.token !== "") {
                     navigate("/"); // 로그인 성공 시 Home으로 이동
                 }
                 // console.log(authContext.state);
             } catch (error) {
                 console.log(error);
+                setLoginErrorMsg("Try Again!");
             }
         }
         await post();
@@ -108,7 +120,11 @@ const LoginForm = () => {
                     />
                 </div>
             </div>
-            <p>{loginErrorMsg}</p>
+            <p className= {loginErrorMsg === "Confirmed!" ? 
+                "login-confirm-text" : 
+                "login-error-text"}>
+                {loginErrorMsg}
+            </p>
             <br></br>
             <button
                 className="Login-button"

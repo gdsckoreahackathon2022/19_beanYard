@@ -1,7 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../App";
 import { getApi } from "../api";
+<<<<<<< HEAD
 import "../styles/MyPageFarmer.css";
+=======
+import '../styles/MyPageFarmer.css';
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
 import { Link } from "react-router-dom";
 
 const MyPageFarmer = () => {
@@ -47,11 +51,15 @@ const MyPageFarmer = () => {
     };
     getFarmerProfile();
     getFarmerCafe();
+<<<<<<< HEAD
   }, [
     authContext.state.token,
     authContext.state.userName,
     authContext.state.userSeq,
   ]);
+=======
+  }, [authContext.state.token, authContext.state.userName, authContext.state.userSeq]);
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
 
   return (
     <div className="my-page-farmer">
@@ -62,6 +70,7 @@ const MyPageFarmer = () => {
         <div className="farmer-title">전화번호</div>
         <div className="farmer-content">{farmerData.phone}</div>
 
+<<<<<<< HEAD
         <div className="farmer-title">키우는 작물</div>
         <div className="farmer-content">{setVegType(farmerData.vegType)}</div>
       </div>
@@ -90,6 +99,32 @@ const MyPageFarmer = () => {
                 </div>
               );
             })}
+=======
+            <div className="farmer-title">키우는 작물</div>
+            <div className="farmer-content">
+                {setVegType(farmerData.vegType)}
+            </div>
+        </div>
+        <div>
+            <div className="title">내가 신청한 리스트</div>
+            <div className="section apply-list">
+                {
+                    applyList.length ?
+                    applyList.map((e, idx) => {
+                        return (
+                          <div className="apply-list-card" key={idx}>
+                              <p className="card-content">카페이름: <span>{e.name}</span></p>
+                              <p className="card-content">날짜: <span>{e.time.split(' ')[0]}</span></p>
+                              <p className="card-content">주소: <span>{e.location}</span></p>
+                              <p className="card-content">신청한 커피박 양: <span>{e.coffee}</span></p>
+                              <p className="card-content">커피박 수거 가능 시간: <span>{e.time}</span></p>
+                          </div>
+                        )
+                    }) :
+                    <div>리스트가 아직 없습니다</div>
+                }
+            </div>
+>>>>>>> b711d23381948adc9414f3edeca5208e5051d36a
         </div>
       </div>
     </div>

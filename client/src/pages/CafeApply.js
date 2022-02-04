@@ -91,6 +91,10 @@ const CafeApply = () => {
         )
         .then(({ status, data }) => {
             console.log(status, data);
+            if(status === 200 || status === 201 || status === 204) {
+                alert('제출되었습니다.');
+                window.location.reload();
+            }
         })
         .catch((e) => {
             console.log(e);
