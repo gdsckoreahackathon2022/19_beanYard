@@ -67,7 +67,7 @@ const MyPageFarmer = () => {
             <div className="title">내가 신청한 리스트</div>
             <div className="section apply-list">
                 {
-                    applyList.length &&
+                    applyList.length ?
                     applyList.map((e, idx) => {
                         return (
                           <div className="apply-list-card" key={idx}>
@@ -78,7 +78,8 @@ const MyPageFarmer = () => {
                               <p className="card-content">커피박 수거 가능 시간: <span>{e.time}</span></p>
                           </div>
                         )
-                    })
+                    }) :
+                    <div>리스트가 아직 없습니다</div>
                 }
             </div>
         </div>
