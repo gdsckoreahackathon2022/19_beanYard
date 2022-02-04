@@ -1,29 +1,55 @@
 import React, { useState } from "react";
-import { postApi } from "../api";
+import { getApi, postApi } from "../api";
 import { AuthContext } from "../App";
 
-const SignupFormFarmer = ({ history }) => {
+const SignupFormCafe = ({ history }) => {
     const [details, setDetails] = useState({
-        name: "",
         userName: "",
         password: "",
         phone: "",
-        cafe: "",
+        vegType: "",
+        userType: "",
     });
     const [signupErrorMsg, setSignupErrorMsg] = useState("");
+    const [userNameCheck, setUserNameCheck] = useState("");
+    const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+
+    const checkUsername = async (e) => {
+        e.preventDefault();
+        await getApi(
+            {
+                userName: details.userName,
+            },
+            "/api/user"
+        )
+        .then(({ status, data }) => {
+            console.log('status:', status);
+            if (status === 204) {
+                setUserNameCheck("Available!");
+                setIsUserNameChecked(true);
+            } else {
+                setUserNameCheck("Duplicated ID. Try another.");
+                setIsUserNameChecked(false);
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
         await postApi(details, "/api/user/register")
             .then(({ status, data }) => {
                 AuthContext.dispatch({
-                    type: "FarmerLogin",
+                    type: "login",
                     token: data.token,
                     userName: details.userName,
-                    userType: 'f',
+                    userSeq: data.userSeq,
+                    userType: data.userType,
                 });
                 
-                history.pushState("/login"); // 성공 시 login 으로 이동
+                // history.pushState("/login"); // 성공 시 login 으로 이동
             })
             .catch((e) => {
                 console.log("Signup Failed")
@@ -33,19 +59,7 @@ const SignupFormFarmer = ({ history }) => {
     return (
         <form className="Signup-outer-form" onSubmit={submitHandler}>
             <div className="form-group">
-                <h5>NAME</h5>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, userName: e.target.value })
-                    }
-                    value={details.userName}
-                />
-            </div>
-            <div className="form-group">
-                <h5>ID</h5>
+                <h5>User ID</h5>
                 <input
                     type="text"
                     name="userName"
@@ -56,8 +70,12 @@ const SignupFormFarmer = ({ history }) => {
                     value={details.userName}
                 />
             </div>
+            <button
+                    onClick={checkUsername}
+                >Check</button>
+                <p>{userNameCheck}</p>
             <div className="form-group">
-                <h5>PASSWORD</h5>
+                <h5>Password</h5>
                 <input
                     type="password"
                     name="password"
@@ -69,7 +87,7 @@ const SignupFormFarmer = ({ history }) => {
                 />
             </div>
             <div className="form-group">
-                <h5>PHONE NUMBER</h5>
+                <h5>Phone</h5>
                 <input
                     name="phone"
                     placeholder=""
@@ -79,16 +97,27 @@ const SignupFormFarmer = ({ history }) => {
                     value={details.phone}
                 />
             </div>
+
             <div className="form-group">
-                <h5>CAFE</h5>
-                
+                <h5>Vegetable</h5>
+                <input
+                    name="plant"
+                    placeholder="Plant"
+                    onChange={(e) =>
+                        setDetails({ ...details, plant: e.target.value })
+                    }
+                    value={details.plant}
+                />
             </div>
 
             <p>{signupErrorMsg}</p>
             <br></br>
-            <button type="submit">Sign Up</button>
+            <button 
+                type="submit"
+                disabled={!isUserNameChecked}
+            >Sign Up</button>
         </form>
     );
 };
 
-export default SignupFormFarmer;
+export default SignupFormCafe;

@@ -8,4 +8,5 @@ export { default as MainFarmer } from "./MainFarmer";
 export { default as MyPageCafe } from "./MyPageCafe";
 export { default as MyPageFarmer } from "./MyPageFarmer";
 export { default as HowTo } from "./HowTo";
+export { default as ChooseType } from "./ChooseType";
 export { default as NotFound } from "./NotFound";
