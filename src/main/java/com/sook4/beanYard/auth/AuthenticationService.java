@@ -12,7 +12,7 @@ import static java.util.Collections.emptyList;
 
 public class AuthenticationService {
     static final long EXPIRATIONTIME = 864_000_00;
-    static final String SIGNINGKEY = "beanYardSigningKeyfeieifefhdskdjcksjdhfkjehfkusefsdfsefdbeanYardSigningKeyfeieifefhdskdjcksjdhfkjehfkusefsdfsefd";
+    static final String SIGNINGKEY = "beanYardSigningKeysafwdkufheufhsoiuehfosiehfoiehfoiehfoisehfifhsoeihfosdifhdsjfhsdfefdfsef";
     static final String BEARER_PREFIX = "Bearer";
 
     static public void addJWTToken(HttpServletResponse response, String username) {
@@ -22,6 +22,7 @@ public class AuthenticationService {
                 .compact();
         response.addHeader("Authorization", BEARER_PREFIX + " " + JwtToken);
         response.addHeader("Access-Control-Expose-Headers", "Authorization");
+        response.addHeader("username", username);
     }
 
     static public UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {

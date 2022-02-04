@@ -1,5 +1,6 @@
 package com.sook4.beanYard.auth;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,10 @@ public class User {
     private String userName;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private UserType userType;
 
     public User(String userName, String password) {
         this.userName = userName;

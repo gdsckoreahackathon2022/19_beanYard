@@ -1,18 +1,37 @@
 package com.sook4.beanYard.auth;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final Oauth2Kakao oauth2Kakao;
+    private final UserRepository userRepository;
 
-    // 카카오로 인증받기
-    public void oauth2AuthorizationKakao(String code) throws JsonProcessingException {
-        AuthorizationKakao authorization = oauth2Kakao.callTokenApi(code);
-        String userInfoFromKakao = oauth2Kakao.callGetUserByAccessToken(authorization.getAccess_token());
-        System.out.println("userInfoFromKakao = " + userInfoFromKakao);
+    private final ModelMapper modelMapper;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public Optional<UserCredentials> saveUser(UserCredentials userCredentials) {
+        userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+        User savedUser = userRepository.save(modelMapper.map(userCredentials, User.class));
+
+        return Optional.of(modelMapper.map(savedUser, UserCredentials.class));
     }
+
+    public Optional<UserCredentials> getUser(String username) {
+        Optional<User> byUserName = userRepository.findByUserName(username);
+
+        return Optional.of(modelMapper.map(byUserName.get(), UserCredentials.class));
+    }
+
 }

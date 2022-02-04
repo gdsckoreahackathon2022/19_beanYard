@@ -8,4 +8,5 @@ import lombok.Setter;
 public class UserCredentials {
     private String userName;
     private String password;
+    private UserType userType;
 }
