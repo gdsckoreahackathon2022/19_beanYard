@@ -10,7 +10,7 @@ const SignupFormFarmer = () => {
         userName: "",
         password: "",
         phone: "",
-        vegType: "",
+        vegType: "PEPPER",
         userType: "FARMER",
     });
     const [signupErrorMsg, setSignupErrorMsg] = useState("");
@@ -56,7 +56,7 @@ const SignupFormFarmer = () => {
             authContext.state.token
             ).then(({ status, data }) => {
                 console.log(data);
-                navigate("/login"); // È¸¿ø°¡ÀÔ ¼º°ø ½Ã ·Î±×ÀÎÃ¢À¸·Î ÀÌµ¿
+                navigate("/login"); // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
             })
             .catch((e) => {
                 setSignupErrorMsg("Signup Failed") 
@@ -121,6 +121,7 @@ const SignupFormFarmer = () => {
                     onChange={(e) =>
                         setDetails({ ...details, vegType: e.target.value })
                     }
+                    disabled
                     value={details.vegType}
                 />
             </div>

@@ -34,7 +34,7 @@ const Header = () => {
           <>
             <div className="App-header-Login">
               <Link to="/">About Us</Link>
-              <Link to="/howto">How To</Link>
+              <Link to="/howto">How</Link>
             </div>
             <div>
               <Link to="/login" className="my-page-plain">
@@ -50,13 +50,13 @@ const Header = () => {
             {authContext.state.userType === 'CAFE' ? (
               <div>
                 <Link to="/">About Us</Link>
-                <Link to="/howto">How To</Link>
+                <Link to="/howto">How</Link>
                 <Link to="/maincafe">Main</Link>
               </div>
             ) : (
               <div>
                 <Link to="/">About Us</Link>
-                <Link to="/howto">How To</Link>
+                <Link to="/howto">How</Link>
                 <Link to="/mainfarmer">Main</Link>
               </div>
             )}
