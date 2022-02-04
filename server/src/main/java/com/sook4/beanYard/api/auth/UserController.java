@@ -31,7 +31,10 @@ public class UserController {
 
         Optional<UserCredentials> optionalUserDto = userService.getUser(userCredentials.getUserName());
 
-        return optionalUserDto.map(credentials -> ResponseEntity.status(HttpStatus.OK).body(credentials)).orElseGet(() -> ResponseEntity.noContent().build());
+        if (optionalUserDto != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(optionalUserDto.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
-
 }

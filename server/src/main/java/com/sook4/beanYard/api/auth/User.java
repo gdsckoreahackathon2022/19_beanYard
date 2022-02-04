@@ -31,6 +31,8 @@ public class User {
 
     private String phone;
 
+    private double coffee;
+
     @Enumerated(EnumType.STRING)
     @NotNull
     private VegType vegType;

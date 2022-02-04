@@ -25,4 +25,6 @@ public class UserCredentials {
     private VegType vegType;
 
     private UserType userType;
+
+    private double coffee;
 }
