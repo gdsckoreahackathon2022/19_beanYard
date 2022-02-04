@@ -30,6 +30,10 @@
   color: black;
 }
 
+a {
+  text-decoration: none;
+}
+
 .App-header a:hover {
   color:#5EB88A;
 }

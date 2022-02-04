@@ -1,102 +1,118 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../App";
-import { postApi } from "../api";
+import { postApi, getApi } from "../api";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import '../styles/Signup.css';
 
-
-const LoginForm = ({ history }) => {
-    const [details, setDetails] = useState({
-        userType: "",
-        userName: "", 
+const LoginForm = () => {
+    const [userData, setUserData] = useState({
+        userName: "",
         password: "",
     });
-    const [userNameCheck, setUserNameCheck] = useState("");
-    const [isUserNameChecked, setIsUserNameChecked] = useState(false);
-    const [userCF, setUserCF] = useState("");
 
+    const [auth, setAuth] = useState({
+        type: "",
+        token: "",
+        userName: userData.userName,
+        userType: "",
+        userSeq: "",
+    });
+
+    const [loginErrorMsg, setLoginErrorMsg] = useState("");
     const authContext = useContext(AuthContext);
-
-    const checkUsername = async (e) => {
-        e.preventDefault();
-
-        await postApi(details.userName, "/check/username")
-            .then(({ status, data }) => {
-                if (status === 200){
-                    setUserNameCheck("사용 가능한 아이디입니다.");
-                    setIsUserNameChecked(true);
-                } else {
-                    setUserNameCheck("중복된 아이디입니다.");
-                    setIsUserNameChecked(false);
-                }
-            })
-            .catch((e) => {
-                
-                console.log(e.response);
-            });
-    }
+    const navigate = useNavigate();
 
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        await postApi(details.userName, "/check/userType")
-            .then(({ status, data }) => {
-                setUserCF(data.userType);
-            })
-            .catch((e) => {
-                console.log(e.response);
-            });
-
-        await postApi(details, "/login")
-            .then(({ status, data }) => {
-                authContext.dispatch({
-                    type: "login",
-                    token: data.token,
-                    userName: details.userName,
-                    userType: userCF,
+        const post = async () => {
+            try {
+                const res = await axios.post("http://27.96.134.100:8080/login",
+                    userData, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: "application/json",
+                        }
+                    }
+                )
+                // console.log(res);
+                // console.log(res.headers.authorization);
+                await getApi(
+                    {
+                        userName: userData.userName,
+                    },
+                    "/api/user"
+                )
+                .then(({ status, data }) => {
+                    if (status === 200) {
+                        // console.log('getdata', data);
+                        setAuth({ 
+                            ...auth, 
+                            type: "login",
+                            token: res.headers.authorization,
+                            userName: data.userName,
+                            userType: data.userType,
+                            userSeq: data.userSeq,
+                        })
+                    } else if (status === 401) {
+                        setLoginErrorMsg("Try Again!");
+                    }
+                })
+                .catch((e) => {
+                    setLoginErrorMsg("Try Again!");
+                    console.log(e);
                 });
-                history.push("/"); // 성공 시 home으로 이동
-            })
-            .catch((e) => {
-                console.log(e.response);
-            });
+
+                authContext.dispatch({
+                    ...auth
+                });
+                if (auth.token !== "") {
+                    navigate("/"); // 로그인 성공 시 Home으로 이동
+                }
+                // console.log(authContext.state);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        await post();
     };
 
     return (
         <form className="Login-outer-form" onSubmit={submitHandler}>
-            <div className="Login-form-header">
+            <div className="form-group">
+                <div className="form-item">
+                    <h5>user ID</h5>
+                    <input
+                        type="text"
+                        name="userName"
+                        placeholder=""
+                        onChange={
+                            (e) => setUserData({ ...userData, userName: e.target.value })
+                        }
+                        value={userData.userName}
+                    />
+                </div>
             </div>
             <div className="form-group">
-                <h5>ID</h5>
-                <input
-                    type="text"
-                    name="userName"
-                    placeholder=""
-                    onChange={
-                        (e) => setDetails({ ...details, userName: e.target.value })
-                    }
-                    value={details.userName}
-                />
-                <button
-                    onClick={checkUsername}
-                >중복확인</button>
-                <p>{userNameCheck}</p>
+                <div className="form-item">
+                    <h5>Password</h5>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder=""
+                        onChange={(e) =>
+                            setUserData({ ...userData, password: e.target.value })
+                        }
+                        value={userData.password}
+                    />
+                </div>
             </div>
-            <div className="form-group">
-                <h5>PASSWORD</h5>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, password: e.target.value })
-                    }
-                    value={details.password}
-                />
-            </div>
-            
+            <p>{loginErrorMsg}</p>
             <br></br>
-            <button 
+            <button
+                className="Login-button"
                 type="submit"
-                disabled={!isUserNameChecked}
             >LOG IN</button>
             <br />
         </form>

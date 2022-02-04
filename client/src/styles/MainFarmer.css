@@ -1,0 +1,27 @@
+.main-farmer {
+    margin-top: 2vh;
+}
+
+.cafe-list {
+    width: 40vw;
+    position: absolute;
+    right: 20px;
+}
+
+.farmer-apply-card {
+    background: lightgray;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 3vh;
+    font-size: 14px;
+}
+
+.card-content {
+    text-decoration: none;
+    color: black;
+}
+
+.cafe-list {
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+}
