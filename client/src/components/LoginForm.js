@@ -11,6 +11,7 @@ const LoginForm = ({ history }) => {
     });
     const [userNameCheck, setUserNameCheck] = useState("");
     const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+    const [userCF, setUserCF] = useState("");
 
     const authContext = useContext(AuthContext);
 
@@ -19,12 +20,16 @@ const LoginForm = ({ history }) => {
 
         await postApi(details.userName, "/check/username")
             .then(({ status, data }) => {
-                setUserNameCheck("사용 가능한 아이디입니다.");
-                setIsUserNameChecked(true);
+                if (status === 200){
+                    setUserNameCheck("사용 가능한 아이디입니다.");
+                    setIsUserNameChecked(true);
+                } else {
+                    setUserNameCheck("중복된 아이디입니다.");
+                    setIsUserNameChecked(false);
+                }
             })
             .catch((e) => {
-                setUserNameCheck("중복된 아이디입니다.");
-                setIsUserNameChecked(false);
+                
                 console.log(e.response);
             });
     }
@@ -32,18 +37,25 @@ const LoginForm = ({ history }) => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
+        await postApi(details.userName, "/check/userType")
+            .then(({ status, data }) => {
+                setUserCF(data.userType);
+            })
+            .catch((e) => {
+                console.log(e.response);
+            });
+
         await postApi(details, "/login")
             .then(({ status, data }) => {
                 authContext.dispatch({
                     type: "login",
                     token: data.token,
                     userName: details.userName,
-                }); // useContext 처리
-                
+                    userType: userCF,
+                });
                 history.push("/"); // 성공 시 home으로 이동
             })
             .catch((e) => {
-                alert("Login Failed");
                 console.log(e.response);
             });
     };
