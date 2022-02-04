@@ -87,7 +87,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     token: 'tmp',
     userName: null,
-    userType: 'C',
+    userType: 'F',
     userSeq: 1,
   });
 

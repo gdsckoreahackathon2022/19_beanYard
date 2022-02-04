@@ -29,17 +29,6 @@ const MainCafe = () => {
             .then(({ status, data }) => {
                 console.log(status, data);
                 setInfo(data.content);
-                // if (status === 200) {
-                //     console.log(data);
-                //     setCafeData({
-                //         postSeq: data.postSeq,
-                //         cafename: data.cafename,
-                //         location: data.location,
-                //         time: data.time,
-                //         coffee: data.coffee,
-                //         message: data.message,
-                //     });
-                // }
             })
             .catch((e) => {
                 console.log(e);

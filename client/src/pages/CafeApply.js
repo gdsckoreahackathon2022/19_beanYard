@@ -145,7 +145,8 @@ const CafeApply = () => {
                         onReady={fetchPlaces}
                         initialCenter={{ lat: lat, lng: lng}}
                         center={{lat: lat, lng: lng}}
-                        style={{ width: '0', height: '0' }}
+                        // style={{ width: '0', height: '0' }}
+                        style={{ width: '50%' }}
                     >
                         <Marker position={{ lat: lat, lng: lng}} />
                         {
