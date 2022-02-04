@@ -8,9 +8,26 @@ const LoginForm = ({ history }) => {
         userType: "",
         userName: "", 
         password: "",
-    }); // useState ¡§∫∏ : id, password
-    const [loginErrorMsg, setLoginErrorMsg] = useState("");
+    });
+    const [userNameCheck, setUserNameCheck] = useState("");
+    const [isUserNameChecked, setIsUserNameChecked] = useState(false);
+
     const authContext = useContext(AuthContext);
+
+    const checkUsername = async (e) => {
+        e.preventDefault();
+
+        await postApi(details.userName, "/check/username")
+            .then(({ status, data }) => {
+                setUserNameCheck("ÏÇ¨Ïö© Í∞ÄÎä•Ìïú ÏïÑÏù¥ÎîîÏûÖÎãàÎã§.");
+                setIsUserNameChecked(true);
+            })
+            .catch((e) => {
+                setUserNameCheck("Ï§ëÎ≥µÎêú ÏïÑÏù¥ÎîîÏûÖÎãàÎã§.");
+                setIsUserNameChecked(false);
+                console.log(e.response);
+            });
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -21,14 +38,13 @@ const LoginForm = ({ history }) => {
                     type: "login",
                     token: data.token,
                     userName: details.userName,
-                }); // useContext √≥∏Æ
+                }); // useContext Ï≤òÎ¶¨
                 
-                history.push("/"); // º∫∞¯ Ω√ home¿∏∑Œ ¿Ãµø
+                history.push("/"); // ÏÑ±Í≥µ Ïãú homeÏúºÎ°ú Ïù¥Îèô
             })
             .catch((e) => {
                 alert("Login Failed");
                 console.log(e.response);
-                setLoginErrorMsg("Login Failed");
             });
     };
 
@@ -47,6 +63,10 @@ const LoginForm = ({ history }) => {
                     }
                     value={details.userName}
                 />
+                <button
+                    onClick={checkUsername}
+                >Ï§ëÎ≥µÌôïÏù∏</button>
+                <p>{userNameCheck}</p>
             </div>
             <div className="form-group">
                 <h5>PASSWORD</h5>
@@ -61,9 +81,11 @@ const LoginForm = ({ history }) => {
                 />
             </div>
             
-            <p>{loginErrorMsg}</p>
             <br></br>
-            <button type="submit">LOG IN</button>
+            <button 
+                type="submit"
+                disabled={!isUserNameChecked}
+            >LOG IN</button>
             <br />
         </form>
     );

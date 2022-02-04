@@ -9,7 +9,7 @@ const putApi = async (data, end_url, token) => {
     if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
     }
-    return await axios.put("http://" + end_url, data, config);
+    return await axios.put("http://27.96.134.100:8080" + end_url, data, config);
 };
 
 export default putApi;
