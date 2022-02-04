@@ -56,9 +56,9 @@ a {
 }
 
 .my-page-plain {
-  color: #443826;
+  color: #443826 !important;
   font-size: 14px;
-  margin: 0 5px;
+  margin: 0 5px !important;
 }
 
 .my-page-btn {
