@@ -26,7 +26,7 @@ public class QApply extends EntityPathBase<Apply> {
 
     public final NumberPath<Long> applySeq = createNumber("applySeq", Long.class);
 
-    public final com.sook4.beanYard.auth.QUser applyUser;
+    public final com.sook4.beanYard.api.auth.QUser applyUser;
 
     public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
@@ -49,7 +49,7 @@ public class QApply extends EntityPathBase<Apply> {
     public QApply(Class<? extends Apply> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.applyCafe = inits.isInitialized("applyCafe") ? new com.sook4.beanYard.api.entity.cafe.QCafe(forProperty("applyCafe"), inits.get("applyCafe")) : null;
-        this.applyUser = inits.isInitialized("applyUser") ? new com.sook4.beanYard.auth.QUser(forProperty("applyUser")) : null;
+        this.applyUser = inits.isInitialized("applyUser") ? new com.sook4.beanYard.api.auth.QUser(forProperty("applyUser")) : null;
     }
 
 }

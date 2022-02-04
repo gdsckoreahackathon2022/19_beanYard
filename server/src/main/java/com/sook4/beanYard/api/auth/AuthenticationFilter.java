@@ -1,4 +1,4 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

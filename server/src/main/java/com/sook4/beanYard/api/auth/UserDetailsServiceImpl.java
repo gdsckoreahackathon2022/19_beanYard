@@ -1,4 +1,4 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

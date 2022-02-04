@@ -1,13 +1,12 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserType {
-    CAFE("카페주인"),
-    FARM("농장주");
+public enum VegType {
+    PEPPER("고추");
 
     private String description;
 }

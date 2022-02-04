@@ -26,7 +26,7 @@ public class QCafe extends EntityPathBase<Cafe> {
 
     public final NumberPath<Long> cafeSeq = createNumber("cafeSeq", Long.class);
 
-    public final com.sook4.beanYard.auth.QUser cafeUser;
+    public final com.sook4.beanYard.api.auth.QUser cafeUser;
 
     public final NumberPath<Long> coffee = createNumber("coffee", Long.class);
 
@@ -34,13 +34,13 @@ public class QCafe extends EntityPathBase<Cafe> {
 
     public final NumberPath<Double> lat = createNumber("lat", Double.class);
 
+    public final StringPath location = createString("location");
+
     public final NumberPath<Double> lon = createNumber("lon", Double.class);
 
     public final StringPath message = createString("message");
 
     public final StringPath name = createString("name");
-
-    public final StringPath number = createString("number");
 
     public final DateTimePath<java.time.LocalDateTime> time = createDateTime("time", java.time.LocalDateTime.class);
 
@@ -62,7 +62,7 @@ public class QCafe extends EntityPathBase<Cafe> {
 
     public QCafe(Class<? extends Cafe> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.cafeUser = inits.isInitialized("cafeUser") ? new com.sook4.beanYard.auth.QUser(forProperty("cafeUser")) : null;
+        this.cafeUser = inits.isInitialized("cafeUser") ? new com.sook4.beanYard.api.auth.QUser(forProperty("cafeUser")) : null;
     }
 
 }

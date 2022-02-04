@@ -1,4 +1,4 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -16,11 +16,13 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QUser extends EntityPathBase<User> {
 
-    private static final long serialVersionUID = 1542445964L;
+    private static final long serialVersionUID = -1182381256L;
 
     public static final QUser user = new QUser("user");
 
     public final StringPath password = createString("password");
+
+    public final StringPath phone = createString("phone");
 
     public final ListPath<com.sook4.beanYard.api.entity.apply.Apply, com.sook4.beanYard.api.entity.apply.QApply> userApply = this.<com.sook4.beanYard.api.entity.apply.Apply, com.sook4.beanYard.api.entity.apply.QApply>createList("userApply", com.sook4.beanYard.api.entity.apply.Apply.class, com.sook4.beanYard.api.entity.apply.QApply.class, PathInits.DIRECT2);
 
@@ -30,7 +32,9 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Long> userSeq = createNumber("userSeq", Long.class);
 
-    public final EnumPath<UserType> userType = createEnum("userType", UserType.class);
+    public final EnumPath<com.sook4.beanYard.api.enums.UserType> userType = createEnum("userType", com.sook4.beanYard.api.enums.UserType.class);
+
+    public final EnumPath<com.sook4.beanYard.api.enums.VegType> vegType = createEnum("vegType", com.sook4.beanYard.api.enums.VegType.class);
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

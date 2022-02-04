@@ -11,6 +11,8 @@ public class CafeDto {
 
     private String name;
 
+    private String location;
+
     private Double lon;
 
     private Double lat;
@@ -21,8 +23,6 @@ public class CafeDto {
     private Long coffee;
 
     private String message;
-
-    private String number;
 
     private Long userSeq;
 }

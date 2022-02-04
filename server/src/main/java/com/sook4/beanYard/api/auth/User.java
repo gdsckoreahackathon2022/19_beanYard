@@ -1,7 +1,9 @@
-package com.sook4.beanYard.auth;
+package com.sook4.beanYard.api.auth;
 
 import com.sook4.beanYard.api.entity.apply.Apply;
 import com.sook4.beanYard.api.entity.cafe.Cafe;
+import com.sook4.beanYard.api.enums.UserType;
+import com.sook4.beanYard.api.enums.VegType;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +28,12 @@ public class User {
     private String userName;
 
     private String password;
+
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private VegType vegType;
 
     @Enumerated(EnumType.STRING)
     @NotNull

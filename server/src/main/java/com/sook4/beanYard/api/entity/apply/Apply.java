@@ -3,7 +3,7 @@ package com.sook4.beanYard.api.entity.apply;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sook4.beanYard.api.entity.cafe.Cafe;
-import com.sook4.beanYard.auth.User;
+import com.sook4.beanYard.api.auth.User;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

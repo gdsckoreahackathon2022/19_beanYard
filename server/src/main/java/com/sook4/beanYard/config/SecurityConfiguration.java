@@ -1,8 +1,8 @@
 package com.sook4.beanYard.config;
 
-import com.sook4.beanYard.auth.AuthenticationFilter;
-import com.sook4.beanYard.auth.LoginFilter;
-import com.sook4.beanYard.auth.UserDetailsServiceImpl;
+import com.sook4.beanYard.api.auth.AuthenticationFilter;
+import com.sook4.beanYard.api.auth.LoginFilter;
+import com.sook4.beanYard.api.auth.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

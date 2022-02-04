@@ -3,7 +3,7 @@ package com.sook4.beanYard.api.entity.cafe;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sook4.beanYard.api.entity.apply.Apply;
-import com.sook4.beanYard.auth.User;
+import com.sook4.beanYard.api.auth.User;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +29,8 @@ public class Cafe {
 
     private String name;
 
+    private String location;
+
     private Double lon;
 
     private Double lat;
@@ -39,8 +41,6 @@ public class Cafe {
     private Long coffee;
 
     private String message;
-
-    private String number;
 
     @NotNull
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.MERGE})
