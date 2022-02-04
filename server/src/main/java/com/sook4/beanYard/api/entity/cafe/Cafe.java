@@ -49,4 +49,7 @@ public class Cafe {
 
     @OneToMany(mappedBy = "applyCafe")
     private List<Apply> applyCafes;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime createdAt;
 }

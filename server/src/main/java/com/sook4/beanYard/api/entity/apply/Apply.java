@@ -35,4 +35,7 @@ public class Apply {
     @ManyToOne(targetEntity = Cafe.class, fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.MERGE})
     @JoinColumn(name = "CAFE_SEQ", referencedColumnName = "cafe_seq")
     private Cafe applyCafe;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime createdAt;
 }

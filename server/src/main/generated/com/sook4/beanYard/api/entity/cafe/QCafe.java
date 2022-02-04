@@ -30,6 +30,8 @@ public class QCafe extends EntityPathBase<Cafe> {
 
     public final NumberPath<Long> coffee = createNumber("coffee", Long.class);
 
+    public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
+
     public final NumberPath<Double> lat = createNumber("lat", Double.class);
 
     public final NumberPath<Double> lon = createNumber("lon", Double.class);

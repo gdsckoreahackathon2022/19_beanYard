@@ -28,6 +28,8 @@ public class QApply extends EntityPathBase<Apply> {
 
     public final com.sook4.beanYard.auth.QUser applyUser;
 
+    public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
+
     public QApply(String variable) {
         this(Apply.class, forVariable(variable), INITS);
     }

@@ -26,6 +26,7 @@ public class CafeService {
 
     public Optional<CafeDto> addCafe(CafeDto cafeDto) {
         Cafe map = modelMapper.map(cafeDto, Cafe.class);
+        map.setCreatedAt(LocalDateTime.now());
 
         Cafe savedCafe = cafeRepository.save(map);
 
