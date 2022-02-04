@@ -46,8 +46,6 @@ public class ApplyService {
         user.setCoffee(user.getCoffee() + byId.getCoffee());
         userRepository.saveAndFlush(user);
 
-        cafeRepository.delete(byId);
-
         return Optional.of(modelMapper.map(savedApply, ApplyDto.class));
     }
 
