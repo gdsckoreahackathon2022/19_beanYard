@@ -1,9 +1,14 @@
 package com.sook4.beanYard.api.service.apply;
 
+import com.sook4.beanYard.api.auth.User;
+import com.sook4.beanYard.api.auth.UserRepository;
 import com.sook4.beanYard.api.dto.ApplyDto;
 import com.sook4.beanYard.api.dto.ApplySearchCondition;
+import com.sook4.beanYard.api.dto.CafeSearchCondition;
 import com.sook4.beanYard.api.entity.apply.Apply;
+import com.sook4.beanYard.api.entity.cafe.Cafe;
 import com.sook4.beanYard.api.repository.apply.ApplyRepository;
+import com.sook4.beanYard.api.repository.cafe.CafeRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -21,6 +26,10 @@ import java.util.stream.Collectors;
 public class ApplyService {
     private final ApplyRepository applyRepository;
 
+    private final CafeRepository cafeRepository;
+
+    private final UserRepository userRepository;
+
     private final ModelMapper modelMapper;
 
 
@@ -29,6 +38,13 @@ public class ApplyService {
         map.setCreatedAt(LocalDateTime.now());
 
         Apply savedApply = applyRepository.save(map);
+
+        // apply 하면 자동으로 유저 coffee ++
+        Cafe byId = cafeRepository.findById(applyDto.getCafeSeq()).get();
+
+        User user = userRepository.findById(byId.getCafeUser().getUserSeq()).get();
+        user.setCoffee(user.getCoffee() + byId.getCoffee());
+        userRepository.saveAndFlush(user);
 
         return Optional.of(modelMapper.map(savedApply, ApplyDto.class));
     }

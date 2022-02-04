@@ -25,8 +25,11 @@ public class UserService {
 
     public Optional<UserCredentials> getUser(String username) {
         Optional<User> byUserName = userRepository.findByUserName(username);
-
-        return Optional.of(modelMapper.map(byUserName.get(), UserCredentials.class));
+        if (byUserName.isPresent()) {
+            return Optional.of(modelMapper.map(byUserName.get(), UserCredentials.class));
+        } else {
+            return null;
+        }
     }
 
 }

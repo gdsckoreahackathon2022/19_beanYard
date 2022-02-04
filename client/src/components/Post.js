@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { getApi } from "../api";
 import { Link } from "react-router-dom";
+import '../styles/MainFarmer.css';
 
 const Post = ({
         postSeq,
@@ -13,16 +14,15 @@ const Post = ({
     }) => {
     
     return (
-        <div className="farmer-apply-card">
-            <Link to={`/cafedetail/${postSeq}`}>
-                <p>카페이름: {cafeName}</p>
-                <p>전화번호: {phone}</p>
-                <p>주소: {cafeLocation}</p>
-                <p>신청한 커피박 양: {coffee}</p>
-                <p>커피박 수거 가능 시간: {time}</p>
-            </Link>
-        </div>
-        
+        <Link to={`/cafedetail/${postSeq}`} className="card-content">
+            <div className="farmer-apply-card">
+                <p className="card-content">카페이름: {cafeName}</p>
+                <p className="card-content">전화번호: {phone}</p>
+                <p className="card-content">주소: {cafeLocation}</p>
+                <p className="card-content">신청한 커피박 양: {coffee}</p>
+                <p className="card-content">커피박 수거 가능 시간: {time}</p>
+            </div>
+        </Link>        
     )
 };
 

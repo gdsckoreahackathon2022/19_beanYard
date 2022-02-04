@@ -1,10 +1,14 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef, useContext } from "react";
 import '../styles/CafeApply.css';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import DateTimePicker from 'react-datetime-picker';
+import { postApi } from "../api";
+import { AuthContext } from "../App";
+import dayjs from "dayjs";
 
 const CafeApply = () => {
     const donateForm = useRef(null);
+    const authContext = useContext(AuthContext);
 
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
@@ -58,6 +62,41 @@ const CafeApply = () => {
        setSearchBox(new window.google.maps.places.SearchBox(input));
     }, []);
 
+    const postCafeApply = async () => {
+        const cafeName = donateForm.current.cafeName.value;
+        const locationName = donateForm.current.locationName.value;
+        let latitude = parseFloat(0.00), longitude = parseFloat(0.00);
+        const time = dayjs(donateForm.current.dateTime.value).format('YYYY-MM-DD HH:MM:ss');
+        const coffee = parseInt(donateForm.current.coffeeSize.value);
+        const description = donateForm.current.description.value;
+
+        if(markers.length) {
+            latitude = markers[0].loc.lat();
+            longitude = markers[0].loc.lng();
+        }
+        
+        await postApi(
+            {
+                name: cafeName,
+                location: locationName,
+                lon: longitude,
+                lat: latitude,
+                time: time,
+                coffee: coffee,
+                message: description,
+                userSeq: 1
+            },
+            "/api/cafe",
+            authContext.state.token
+        )
+        .then(({ status, data }) => {
+            console.log(status, data);
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    };
+
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -79,19 +118,26 @@ const CafeApply = () => {
     return (
         <div className="cafe-apply">
             <div className="logo">
+                <div className="logo-title">
+                    <div>Donate</div>
+                    <div>Your Coffee Grounds</div>
+                </div>
+                <div>Fill out the form</div>
             </div>
             <div className="form">
                 <form ref={donateForm}>
                     <div>Cafe Name</div>
-                    <input />
+                    <input name="cafeName"/>
 
                     <div>Location</div>
                     <input
                         id="pac-input"
                         className="controls"
                         type="text"
+                        placeholder=""
                         onKeyPress={getInfo}
                         onClick={getInfo}
+                        name="locationName"
                     />
                     <Map
                         google={window.google}
@@ -99,8 +145,8 @@ const CafeApply = () => {
                         onReady={fetchPlaces}
                         initialCenter={{ lat: lat, lng: lng}}
                         center={{lat: lat, lng: lng}}
+                        // style={{ width: '0', height: '0' }}
                         style={{ width: '50%' }}
-                        visible={false}
                     >
                         <Marker position={{ lat: lat, lng: lng}} />
                         {
@@ -132,21 +178,29 @@ const CafeApply = () => {
                         value={value}
                         calendarIcon={null}
                         clearIcon={null}
+                        name="dateTime"
                     />
 
                     <div style={{ clear: 'both' }}></div>
-                    <input className="coffeeSize" />
+                    <input
+                        name="coffeeSize"
+                        className="coffeeSize"
+                    />
                     <span style={{ margin: '12px 6px' }}>g</span>
                     <div style={{ clear: 'both' }}></div>
 
                     <div>Type your message here</div>
-                    <textarea></textarea>
+                    <textarea
+                        name="description"
+                        inputMode="text"
+                    ></textarea>
                     <div style={{ clear: 'both' }}></div>
                 </form>
+                <div style={{ clear: 'both' }}></div>
 
                 <button
-                    className="submit-btn"
-                    onClick={() => {console.log(donateForm.current)}}
+                        className="submit-btn"
+                        onClick={postCafeApply}
                 >Submit</button>
             </div>
         </div>

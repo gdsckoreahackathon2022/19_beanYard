@@ -27,11 +27,14 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<UserCredentials>  getUser(@RequestBody @Validated UserCredentials userCredentials, Errors errors) {
+    public ResponseEntity<UserCredentials>  getUser(@RequestParam("userName") String userName) {
 
-        Optional<UserCredentials> optionalUserDto = userService.getUser(userCredentials.getUserName());
+        Optional<UserCredentials> optionalUserDto = userService.getUser(userName);
 
-        return optionalUserDto.map(credentials -> ResponseEntity.status(HttpStatus.OK).body(credentials)).orElseGet(() -> ResponseEntity.noContent().build());
+        if (optionalUserDto != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(optionalUserDto.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
-
 }

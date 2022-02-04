@@ -20,6 +20,8 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final NumberPath<Double> coffee = createNumber("coffee", Double.class);
+
     public final StringPath password = createString("password");
 
     public final StringPath phone = createString("phone");

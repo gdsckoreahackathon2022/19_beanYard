@@ -12,6 +12,8 @@ public class CafeSearchCondition {
 
     private Long userSeq;
 
+    private Long farmerSeq;
+
     private String name;
 
     private Long coffee;
