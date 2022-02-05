@@ -1,6 +1,7 @@
 # BeanYard :coffee:
-## [공식 페이지](http://beanyard.shop/)
-## [발표 자료](https://drive.google.com/file/d/1zntXRMjywEonVe1H6m5caxxjthtrB5Wn/view?usp=drivesdk)
+- [공식 페이지](http://beanyard.shop/)
+- [발표 자료](https://drive.google.com/file/d/1zntXRMjywEonVe1H6m5caxxjthtrB5Wn/view?usp=drivesdk)
+
 ## What is BeanYard?
 <p>커피 1 잔에 사용되는
 커피콩은 고작 0.2%이고, 나머지 98.9%는 사용되지 못한채 버려지곤 합니다. 아메리카노 한 잔을 만들기 위해 약 15g의 커피원두가 사용되는데, 이 중 14.97g 가 버려지는 셈입니다.</p>
