@@ -25,9 +25,9 @@
 
 ## Tech. Stacks
 - React
-- Spring Boot
+- Spring Boot, MySQL, QueryDSL
 - Figma
-- Naver Cloud Platform
+- Naver Cloud Platform, AWS RDS
 
 ## Members
 <table>
